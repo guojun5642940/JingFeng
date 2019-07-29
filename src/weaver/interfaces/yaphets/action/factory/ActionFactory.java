@@ -2,6 +2,7 @@ package weaver.interfaces.yaphets.action.factory;
 
 import weaver.interfaces.yaphets.action.service.ifr.FixedAssetsServiceIfr;
 import weaver.interfaces.yaphets.action.service.impl.AllocationApplicationService;
+import weaver.interfaces.yaphets.action.service.impl.PurchaseService;
 import weaver.interfaces.yaphets.util.Constants;
 
 /**
@@ -23,6 +24,9 @@ public class ActionFactory {
         switch (workflowId){
             case Constants.WORKFLOWID_ALLOCATION_APPLICATION :
                 fixedAssetsServiceIfr = new AllocationApplicationService();
+                break;
+            case Constants.WORKFLOWID_PURCHASE:
+                fixedAssetsServiceIfr = new PurchaseService();
                 break;
             default:
                 fixedAssetsServiceIfr = null;

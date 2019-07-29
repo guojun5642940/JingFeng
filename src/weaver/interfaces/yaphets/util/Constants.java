@@ -13,6 +13,9 @@ public class Constants {
     //固定资产调拨申请流程
     public static final int WORKFLOWID_ALLOCATION_APPLICATION = 740;
 
+    //固定资产调拨申请流程
+    public static final int WORKFLOWID_PURCHASE = 741;
+
     //固定资产-建模-表名
     public static final String MODEL_TABLENAME_GDZC = "uf_zckp";
 
