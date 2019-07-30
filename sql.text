@@ -1,0 +1,85 @@
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[NumSeq]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[NumSeq]
+GO
+
+CREATE TABLE [dbo].[NumSeq] (
+    [Prefix] [varchar] (20) COLLATE Chinese_PRC_CI_AS NOT NULL ,
+    [Seq] [int] NOT NULL ,
+    [LastDate] [datetime] NOT NULL 
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[NumSeq] WITH NOCHECK ADD 
+    CONSTRAINT [PK_NumSeq] PRIMARY KEY CLUSTERED 
+    (
+        [Prefix]
+    ) ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[NumSeq] ADD 
+    CONSTRAINT [DF_NumSeq_Prefix] DEFAULT (0) FOR [Prefix],
+    CONSTRAINT [DF_NumSeq_Seq] DEFAULT (0) FOR [Seq],
+    CONSTRAINT [DF_NumSeq_LastDate] DEFAULT (getdate()) FOR [LastDate]
+GO
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[GetSeqNum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [dbo].[GetSeqNum]
+GO
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS ON 
+GO
+CREATE PROCEDURE GetSeqNum
+    @Prefix    VARCHAR(20)
+AS
+    SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+    BEGIN TRANSACTION    
+        DECLARE
+        @Seq INT,
+        @LastDate DATETIME,
+        @Now DATETIME,
+        @MaintainNo VARCHAR(20)
+
+        ----INIT
+        SELECT @Now=GETDATE()
+
+       
+        ----INSERT
+        IF NOT EXISTS(SELECT * FROM NumSeq WHERE Prefix=@Prefix)
+        BEGIN
+                        INSERT INTO NumSeq(Prefix,Seq,LastDate) VALUES(UPPER(@Prefix),0,@Now)      
+        END
+               
+    --GET LastDate
+        SELECT @LastDate=LastDate FROM NumSeq WHERE Prefix=@Prefix
+       
+    ----IF LastDate > Now 
+    IF(@LastDate > @Now)
+    BEGIN            
+        RAISERROR ('LastDate < Now ,Please check system time.' , 16, 1) WITH NOWAIT
+        ROLLBACK TRANSACTION 
+        RETURN 0
+    END ELSE BEGIN
+            ----UPDATE
+            IF (DATEDIFF(DAY,@LastDate,@Now)<>0)
+            BEGIN
+                UPDATE NumSeq SET LastDate=@NOW,Seq=1 WHERE Prefix=@Prefix
+            END ELSE BEGIN
+                UPDATE NumSeq SET Seq=Seq + 1 WHERE Prefix=@Prefix
+            END
+    
+            ----Get Seq Num
+            SELECT @Seq=Seq FROM NumSeq WHERE Prefix=@Prefix       
+            SELECT @MaintainNo=UPPER(@Prefix)  + RIGHT('0000' + CONVERT(VARCHAR(4),@Seq),4)
+    
+            ----Return
+            SELECT @MaintainNo
+    END
+    COMMIT TRANSACTION
+
+
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO

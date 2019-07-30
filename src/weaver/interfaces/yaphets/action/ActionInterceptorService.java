@@ -41,7 +41,7 @@ public class ActionInterceptorService  implements Action {
         String requestId = request.getRequestid();
         String requestName = requestComInfo.getRequestname(requestId);
         String workflowName = WorkflowComInfo.getWorkflowname(workflowId);
-        bs.writeLog("ActionInterceptorService--进入action--workflowId：{"+workflowId+"},workflowName：{"+workflowName+"},requestId：{"+requestId+"},requestName：{"+requestName+"},");
+        bs.writeLog("ActionInterceptorService--进入action--workflowId：{"+workflowId+"},workflowName：{"+workflowName+"},requestId：{"+requestId+"},requestName：{"+requestName+"}");
         ActionFactory factory = new ActionFactory();
         FixedAssetsServiceIfr service = factory.createActionHandle(Integer.parseInt(workflowId));
         JSONObject result = service.excute(request);
