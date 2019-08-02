@@ -25,6 +25,18 @@ public class Constants {
      */
     public static final int WORKFLOWID_BATCH_PURCHASE = 742;
 
+
+    /**
+     * 固定资产报废申请-WFID
+     */
+    public static final int WORKFLOWID_SCRAP = 744;
+
+    /**
+     * 固定资产归还-WFID
+     */
+    public static final int WORKFLOWID_RETURN = 745;
+
+
     /**
      * 固定资产采购申请流程-tableName
      */
@@ -34,6 +46,11 @@ public class Constants {
      * 固定资产卡片批量录入-tableName
      */
     public static final String WORKFLOW_TABLENAME_BATCH_PURCHASE = "formtable_main_491";
+
+    /**
+     * 固定资产报废申请-WFID
+     */
+    public static final String WORKFLOW_TABLENAME_SCRAP = "formtable_main_493";
 
     /**
      * 固定资产-建模-表名

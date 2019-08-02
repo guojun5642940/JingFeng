@@ -8,6 +8,7 @@ import weaver.interfaces.yaphets.action.service.ifr.FixedAssetsServiceIfr;
 import weaver.interfaces.yaphets.util.ActionMapUtil;
 import weaver.interfaces.yaphets.util.CommonUtil;
 import weaver.interfaces.yaphets.util.Constants;
+import weaver.interfaces.yaphets.util.FormModeHandler;
 import weaver.soa.workflow.request.RequestInfo;
 
 import java.util.HashMap;
@@ -31,7 +32,7 @@ public class BatchPurchaseService extends BaseBean implements FixedAssetsService
         Map dataMap = aUtil.getDataMap();
         String currentNodeid = CommonUtil.getCurrentNodeId(requestId);
 
-        String sql = "select * from "+ Constants.WORKFLOW_TABLENAME_BATCH_PURCHASE +"_dt1 where mainid = (select id from formtable_main_491 where requestid = '"+requestId+"')";
+        String sql = "select * from "+ Constants.WORKFLOW_TABLENAME_BATCH_PURCHASE +"_dt1 where mainid = (select id from "+ Constants.WORKFLOW_TABLENAME_BATCH_PURCHASE +" where requestid = '"+requestId+"')";
         RecordSet rs = new RecordSet();
         RecordSet rsUpdate = new RecordSet();
 
@@ -68,6 +69,7 @@ public class BatchPurchaseService extends BaseBean implements FixedAssetsService
 
         //归档前将数据写入表单建模
         if(currentNodeid.equals(Constants.NODEID_LAST_PLLR)){
+            FormModeHandler modeHandler = new FormModeHandler();
             rs.execute(sql);
             while(rs.next()){
                 String gsmc = Util.null2String(rs.getString("gsmc"));
@@ -91,24 +93,23 @@ public class BatchPurchaseService extends BaseBean implements FixedAssetsService
                 formDataMap.put("gsmc" ,gsmc);
                 formDataMap.put("zclb" ,zclb);
                 formDataMap.put("zclx" ,zclx);
-                formDataMap.put("ggxh" ,ggxh);
                 formDataMap.put("gdzcbm" ,gdzcbm);
+                formDataMap.put("ggxh" ,ggxh);
                 formDataMap.put("gzny" ,gzny);
                 formDataMap.put("jldw" ,jldw);
                 formDataMap.put("gzrq" ,gzrq);
+                formDataMap.put("cfdd" ,cfdd);
                 formDataMap.put("syzx" ,syzx);
                 formDataMap.put("cgr" ,cgr);
                 formDataMap.put("syr" ,syr);
                 formDataMap.put("sybm" ,sybm);
-                formDataMap.put("cfdd" ,cfdd);
-                formDataMap.put("bmzrr" ,bmzrr);
                 formDataMap.put("lyrq" ,lyrq);
+                formDataMap.put("bmzrr" ,bmzrr);
                 formDataMap.put("zczt" ,"1");
                 formDataMap.put("gmdj" ,gmdj);
+                int modeDataId = modeHandler.saveModeData(Constants.MODEID_GDZC,"1",formDataMap,"");
             }
         }
-
-
-        return null;
+        return result;
     }
 }

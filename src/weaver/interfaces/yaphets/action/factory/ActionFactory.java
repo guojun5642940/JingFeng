@@ -4,6 +4,7 @@ import weaver.interfaces.yaphets.action.service.ifr.FixedAssetsServiceIfr;
 import weaver.interfaces.yaphets.action.service.impl.AllocationApplicationService;
 import weaver.interfaces.yaphets.action.service.impl.BatchPurchaseService;
 import weaver.interfaces.yaphets.action.service.impl.PurchaseService;
+import weaver.interfaces.yaphets.action.service.impl.ScrapService;
 import weaver.interfaces.yaphets.util.Constants;
 
 /**
@@ -32,6 +33,9 @@ public class ActionFactory {
              case Constants.WORKFLOWID_BATCH_PURCHASE:
                  fixedAssetsServiceIfr = new BatchPurchaseService();
                  break;
+             case Constants.WORKFLOWID_SCRAP:
+                fixedAssetsServiceIfr = new ScrapService();
+                break;
             default:
                 fixedAssetsServiceIfr = null;
         }
