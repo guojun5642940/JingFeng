@@ -21,7 +21,7 @@ public class Constants {
     public static final int WORKFLOWID_PURCHASE = 741;
 
     /**
-     * 固定资产卡片批量录入流程
+     * 固定资产卡片批量录入-WFID
      */
     public static final int WORKFLOWID_BATCH_PURCHASE = 742;
 
@@ -29,6 +29,11 @@ public class Constants {
      * 固定资产采购申请流程-tableName
      */
     public static final String WORKFLOW_TABLENAME_GDZCSQ = "formtable_main_490";
+
+    /**
+     * 固定资产卡片批量录入-tableName
+     */
+    public static final String WORKFLOW_TABLENAME_BATCH_PURCHASE = "formtable_main_491";
 
     /**
      * 固定资产-建模-表名
@@ -45,10 +50,21 @@ public class Constants {
      * 固定资产采购申请流程-发起节点nodeid
      */
     public static final String NODEID_FIRST_GDZCSQ = "8392";
+
     /**
      * 固定资产采购申请流程-归档前节点(目前为了测试写第一个节点)
      */
     public static final String NODEID_LAST_GDZCSQ = "8392";
+
+    /**
+     * 固定资产批量录入流程-发起节点nodeid
+     */
+    public static final String NODEID_FIRST_PLLR = "8387";
+
+    /**
+     * 固定资产批量录入流程-归档前节点(目前为了测试写第一个节点)
+     */
+    public static final String NODEID_LAST_PLLR = "8387";
 
 
 
