@@ -42,19 +42,19 @@ public class ActionInterceptorService  implements Action {
         String requestName = requestComInfo.getRequestname(requestId);
         String workflowName = WorkflowComInfo.getWorkflowname(workflowId);
         bs.writeLog("ActionInterceptorService--进入action--workflowId：{"+workflowId+"},workflowName：{"+workflowName+"},requestId：{"+requestId+"},requestName：{"+requestName+"}");
-//        ActionFactory factory = new ActionFactory();
-//        FixedAssetsServiceIfr service = factory.createActionHandle(Integer.parseInt(workflowId));
-//        JSONObject result = service.excute(request);
-//        try {
-//            String flag = Util.null2String(result.get("flag"));
-//            String msg = Util.null2String(result.get("msg"));
-//            if("false".equals(flag)){
-//                request.getRequestManager().setMessagecontent(msg);
-//                request.getRequestManager().setMessageid(TimeUtil.getCurrentTimeString());
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+        ActionFactory factory = new ActionFactory();
+        FixedAssetsServiceIfr service = factory.createActionHandle(Integer.parseInt(workflowId));
+        JSONObject result = service.excute(request);
+        try {
+            String flag = Util.null2String(result.get("flag"));
+            String msg = Util.null2String(result.get("msg"));
+            if("false".equals(flag)){
+                request.getRequestManager().setMessagecontent(msg);
+                request.getRequestManager().setMessageid(TimeUtil.getCurrentTimeString());
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 }

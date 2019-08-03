@@ -21,43 +21,42 @@ ALTER TABLE [dbo].[NumSeq] ADD
     CONSTRAINT [DF_NumSeq_Seq] DEFAULT (0) FOR [Seq],
     CONSTRAINT [DF_NumSeq_LastDate] DEFAULT (getdate()) FOR [LastDate]
 GO
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[GetSeqNum]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure [dbo].[GetSeqNum]
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[HrmQuerySeqByTypeString]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure [dbo].[HrmQuerySeqByTypeString]
 GO
 
 SET QUOTED_IDENTIFIER ON 
 GO
 SET ANSI_NULLS ON 
 GO
-CREATE PROCEDURE GetSeqNum
-    @Prefix    VARCHAR(20)
+CREATE PROCEDURE HrmQuerySeqByTypeString @Prefix    VARCHAR(20),@msg varchar(50) output
 AS
     SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
-    BEGIN TRANSACTION    
+    BEGIN TRANSACTION
         DECLARE
         @Seq INT,
         @LastDate DATETIME,
         @Now DATETIME,
-        @MaintainNo VARCHAR(20)
+        @MaintainNo VARCHAR(50)
 
         ----INIT
         SELECT @Now=GETDATE()
 
-       
+
         ----INSERT
         IF NOT EXISTS(SELECT * FROM NumSeq WHERE Prefix=@Prefix)
         BEGIN
-                        INSERT INTO NumSeq(Prefix,Seq,LastDate) VALUES(UPPER(@Prefix),0,@Now)      
+                        INSERT INTO NumSeq(Prefix,Seq,LastDate) VALUES(UPPER(@Prefix),0,@Now)
         END
-               
+
     --GET LastDate
         SELECT @LastDate=LastDate FROM NumSeq WHERE Prefix=@Prefix
-       
-    ----IF LastDate > Now 
+
+    ----IF LastDate > Now
     IF(@LastDate > @Now)
-    BEGIN            
+    BEGIN
         RAISERROR ('LastDate < Now ,Please check system time.' , 16, 1) WITH NOWAIT
-        ROLLBACK TRANSACTION 
+        ROLLBACK TRANSACTION
         RETURN 0
     END ELSE BEGIN
             ----UPDATE
@@ -67,19 +66,20 @@ AS
             END ELSE BEGIN
                 UPDATE NumSeq SET Seq=Seq + 1 WHERE Prefix=@Prefix
             END
-    
+
             ----Get Seq Num
-            SELECT @Seq=Seq FROM NumSeq WHERE Prefix=@Prefix       
+            SELECT @Seq=Seq FROM NumSeq WHERE Prefix=@Prefix
             SELECT @MaintainNo=UPPER(@Prefix)  + RIGHT('0000' + CONVERT(VARCHAR(4),@Seq),4)
-    
+
             ----Return
             SELECT @MaintainNo
-    END
+			set @msg = @MaintainNo
+
     COMMIT TRANSACTION
+	return END
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+SET ANSI_NULLS ON
+GO
 
-
-GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO

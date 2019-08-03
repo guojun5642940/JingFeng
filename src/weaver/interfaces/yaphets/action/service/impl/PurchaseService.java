@@ -32,13 +32,14 @@ public class PurchaseService extends BaseBean implements FixedAssetsServiceIfr {
         Map dataMap = aUtil.getDataMap();
         String currentNodeid = CommonUtil.getCurrentNodeId(requestId);
 
+        String gdzcbm = "";
         //第一个节点后生成固定资产码
         if(Constants.NODEID_FIRST_GDZCSQ.equals(currentNodeid)){
             //公司名称
             String dwmc = Util.null2String(dataMap.get("dwmc".toLowerCase()).toString());
             String zclb = Util.null2String(dataMap.get("zclb".toLowerCase()).toString());
             String zclx = Util.null2String(dataMap.get("zclx".toLowerCase()).toString());
-            String gdzcbm = Util.null2String(dataMap.get("gdzcbm".toLowerCase()).toString());
+            gdzcbm = Util.null2String(dataMap.get("gdzcbm".toLowerCase()).toString());
 
             String zclbCode = "";
             if("0".equals(zclb)){
@@ -68,7 +69,7 @@ public class PurchaseService extends BaseBean implements FixedAssetsServiceIfr {
 
         //归档前一个节点写入表单建模
         if(Constants.NODEID_LAST_GDZCSQ.equals(currentNodeid)){
-            boolean importResult = saveModeData(dataMap);
+            boolean importResult = saveModeData(dataMap,gdzcbm);
             if(!importResult){
                 result.put("flag",false);
                 result.put("msg","数据库脚本执行失败，请联系管理员！");
@@ -82,13 +83,12 @@ public class PurchaseService extends BaseBean implements FixedAssetsServiceIfr {
      * @param dataMap
      * @return
      */
-    public boolean saveModeData(Map dataMap){
+    public boolean saveModeData(Map dataMap,String gdzcbm){
         FormModeHandler modeHandler = new FormModeHandler();
         String gsmc = Util.null2String(dataMap.get("gsmc".toLowerCase()).toString());
         String zclb = Util.null2String(dataMap.get("zclb".toLowerCase()).toString());
         String zclx = Util.null2String(dataMap.get("zclx".toLowerCase()).toString());
         String ggxh = Util.null2String(dataMap.get("ggxh".toLowerCase()).toString());
-        String gdzcbm = Util.null2String(dataMap.get("gdzcbm".toLowerCase()).toString());
         String gzny = Util.null2String(dataMap.get("gznf".toLowerCase()).toString());
         String jldw = Util.null2String(dataMap.get("jldw".toLowerCase()).toString());
         String gmdj = Util.null2String(dataMap.get("gmdj".toLowerCase()).toString());

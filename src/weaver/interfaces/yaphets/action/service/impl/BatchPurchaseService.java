@@ -88,6 +88,9 @@ public class BatchPurchaseService extends BaseBean implements FixedAssetsService
                 String cfdd = Util.null2String(rs.getString("cfdd"));
                 String gdzcbm = Util.null2String(rs.getString("gdzcbm"));
                 String gmdj = Util.null2String(rs.getString("gmdj"));
+                if("".equals(gmdj)){
+                    gmdj = "0.00";
+                }
 
                 Map<String, String> formDataMap = new HashMap<>();
                 formDataMap.put("gsmc" ,gsmc);
