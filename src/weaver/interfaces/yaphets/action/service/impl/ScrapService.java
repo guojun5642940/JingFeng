@@ -27,11 +27,9 @@ public class ScrapService  extends BaseBean implements FixedAssetsServiceIfr {
         rs.execute(sql);
         while(rs.next()){
             String gdzcbm = Util.null2String(rs.getString("gdzcbm"));
-            String zczt = Util.null2String(rs.getString("zczt"));
-            String updateSql = "update "+Constants.MODEL_TABLENAME_GDZC+" set zczt = '"+zczt+"' where gdzcbm = '"+gdzcbm+"'";
+            String updateSql = "update "+Constants.MODEL_TABLENAME_GDZC+" set zczt = '2' where gdzcbm = '"+gdzcbm+"'";
             writeLog("updateSql["+requestId+"]+"+updateSql);
-            rsUpdate.execute(sql);
-
+            rsUpdate.execute(updateSql);
         }
         return result;
     }

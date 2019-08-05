@@ -21,21 +21,20 @@ public class ReturnService  extends BaseBean implements FixedAssetsServiceIfr {
         ActionMapUtil aUtil = new ActionMapUtil(request);
         Map dataMap = aUtil.getDataMap();
 
-        String syr = Util.null2String(dataMap.get("syr".toLowerCase()).toString());
-        String sybm = Util.null2String(dataMap.get("sybm".toLowerCase()).toString());
-        String syzx = Util.null2String(dataMap.get("syzx".toLowerCase()).toString());
+//        String syr = Util.null2String(dataMap.get("syr".toLowerCase()).toString());
+//        String sybm = Util.null2String(dataMap.get("sybm".toLowerCase()).toString());
+//        String syzx = Util.null2String(dataMap.get("syzx".toLowerCase()).toString());
         String gdzcbm = Util.null2String(dataMap.get("gdzcbm".toLowerCase()).toString());
         RecordSet rsUpdate = new RecordSet();
 
         try {
-            String updateSql = "update "+ Constants.MODEL_TABLENAME_GDZC+" set zczt = '0',syr='"+syr+"',sybm='"+sybm+"',syzx='"+syzx+"' where gdzcbm = '"+gdzcbm+"'";
+            String updateSql = "update "+ Constants.MODEL_TABLENAME_GDZC+" set zczt = '0',syr='',sybm='',syzx='',lyrq='' where gdzcbm = '"+gdzcbm+"'";
             writeLog("ReturnService-updateSql["+requestId+"]+"+updateSql);
             boolean isSuccess = rsUpdate.execute(updateSql);
             if(!isSuccess){
                 result.put("flag",false);
                 result.put("msg","数据更新错误，请联系管理员");
             }
-
         } catch (Exception e) {
             result.put("flag",false);
             result.put("msg","数据库脚本执行失败:"+e.getMessage()+",请联系管理员！");

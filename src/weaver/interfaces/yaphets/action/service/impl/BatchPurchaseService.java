@@ -77,7 +77,6 @@ public class BatchPurchaseService extends BaseBean implements FixedAssetsService
                 String zclx = Util.null2String(rs.getString("zclx"));
                 String ggxh = Util.null2String(rs.getString("ggxh"));
                 String jldw = Util.null2String(rs.getString("jldw"));
-                String gzny = Util.null2String(rs.getString("gzny"));
                 String gzrq = Util.null2String(rs.getString("gzrq"));
                 String syr = Util.null2String(rs.getString("syr"));
                 String sybm = Util.null2String(rs.getString("sybm"));
@@ -98,7 +97,6 @@ public class BatchPurchaseService extends BaseBean implements FixedAssetsService
                 formDataMap.put("zclx" ,zclx);
                 formDataMap.put("gdzcbm" ,gdzcbm);
                 formDataMap.put("ggxh" ,ggxh);
-                formDataMap.put("gzny" ,gzny);
                 formDataMap.put("jldw" ,jldw);
                 formDataMap.put("gzrq" ,gzrq);
                 formDataMap.put("cfdd" ,cfdd);

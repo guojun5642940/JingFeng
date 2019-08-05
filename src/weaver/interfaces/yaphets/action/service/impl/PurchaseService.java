@@ -89,7 +89,6 @@ public class PurchaseService extends BaseBean implements FixedAssetsServiceIfr {
         String zclb = Util.null2String(dataMap.get("zclb".toLowerCase()).toString());
         String zclx = Util.null2String(dataMap.get("zclx".toLowerCase()).toString());
         String ggxh = Util.null2String(dataMap.get("ggxh".toLowerCase()).toString());
-        String gzny = Util.null2String(dataMap.get("gznf".toLowerCase()).toString());
         String jldw = Util.null2String(dataMap.get("jldw".toLowerCase()).toString());
         String gmdj = Util.null2String(dataMap.get("gmdj".toLowerCase()).toString());
         String gzrq = Util.null2String(dataMap.get("gzrq".toLowerCase()).toString());
@@ -108,7 +107,6 @@ public class PurchaseService extends BaseBean implements FixedAssetsServiceIfr {
         formDataMap.put("zclx" ,zclx);
         formDataMap.put("ggxh" ,ggxh);
         formDataMap.put("gdzcbm" ,gdzcbm);
-        formDataMap.put("gzny" ,gzny);
         formDataMap.put("jldw" ,jldw);
         formDataMap.put("gmdj" ,gmdj);
         formDataMap.put("gzrq" ,gzrq);
