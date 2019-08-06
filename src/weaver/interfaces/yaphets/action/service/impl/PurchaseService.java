@@ -85,7 +85,7 @@ public class PurchaseService extends BaseBean implements FixedAssetsServiceIfr {
      */
     public boolean saveModeData(Map dataMap,String gdzcbm){
         FormModeHandler modeHandler = new FormModeHandler();
-        String gsmc = Util.null2String(dataMap.get("gsmc".toLowerCase()).toString());
+        String dwmc = Util.null2String(dataMap.get("dwmc".toLowerCase()).toString());
         String zclb = Util.null2String(dataMap.get("zclb".toLowerCase()).toString());
         String zclx = Util.null2String(dataMap.get("zclx".toLowerCase()).toString());
         String ggxh = Util.null2String(dataMap.get("ggxh".toLowerCase()).toString());
@@ -102,7 +102,7 @@ public class PurchaseService extends BaseBean implements FixedAssetsServiceIfr {
         String zczt = "1";
 
         Map<String, String> formDataMap = new HashMap<>();
-        formDataMap.put("gsmc" ,gsmc);
+        formDataMap.put("gsmc" ,dwmc);
         formDataMap.put("zclb" ,zclb);
         formDataMap.put("zclx" ,zclx);
         formDataMap.put("ggxh" ,ggxh);
