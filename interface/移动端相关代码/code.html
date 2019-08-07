@@ -1,0 +1,86 @@
+<!--1、固定资产查询-->
+<!--扫码按钮单击事件-->
+<html>
+
+    <script>
+
+        // Mobile_NS.scanQRCode(function(result){
+        //     alert(result);
+        // });
+
+        setZCinfo("001-GD-ZC0010003");
+        function setZCinfo(gdzcbm){
+            if(gdzcbm == null || gdzcbm == "" || gdzcbm == undefined){
+                Mobile_NS.Alert("固定资产编码获取错误");
+                return;
+            }
+
+            Mobile_NS.ajax(
+                "/interface/guoj/dataAjaxjs.jsp",
+                {gdzcbm : gdzcbm},
+                function(responseText){
+                    var json = eval("("+responseText+")");
+                    var queryFlag = json.queryFlag;
+                    if(queryFlag == "0"){
+                        Mobile_NS.Alert("未查到相关资产信息");
+                        return;
+                    }
+                    var gsmc = json.gsmc;
+                    var zclb = json.zclb;
+                    var zclx = json.zclx;
+                    var ggxh = json.ggxh;
+                    var gzrq = json.gzrq;
+                    var syzx = json.syzx;
+                    var cgr = json.cgr;
+                    var syr = json.syr;
+                    var sybm = json.sybm;
+                    var cfdd = json.cfdd;
+                    var bmzrr = json.bmzrr;
+                    var zczt = json.zczt;
+
+                    $("#gdzcbm").html(gdzcbm);
+                    $("#gsmc").html(gsmc);
+                    $("#zclb").html(zclb);
+                    $("#zclx").html(zclx);
+                    $("#ggxh").html(ggxh);
+                    $("#gzrq").html(gzrq);
+                    $("#syzx").html(syzx);
+                    $("#cgr").html(cgr);
+                    $("#syr").html(syr);
+                    $("#sybm").html(sybm);
+                    $("#cfdd").html(cfdd);
+                    $("#bmzrr").html(bmzrr);
+                    $("#zczt").html(zczt);
+                }
+            );
+
+        }
+    </script>
+</html>
+
+
+
+<html>
+<head>
+    <link rel="stylesheet" href="../mobilemode/actiontemplet/style.css" type="text/css"/>
+</head>
+<body>
+<input type="hidden" id="id" value="{id}">
+<input type="hidden" id="dbpage" value="{dbpage}">
+<ul class="ul-fields">
+    <li>资产编码（一级）公司名称 : <span id="gsmc"></span></li>
+    <li>资产编码（二级）资产类别 : <span id="zclb"></span></li>
+    <li>资产编码（三级）资产类型 : <span id="zclx"></span></li>
+    <li>规格型号 : <span id="ggxh"></span></li>
+    <li>固定资产编码 : 	<span id="gdzcbm"></span></li>
+    <li>购置日期 : 	<span id="gzrq"></span></li>
+    <li>使用中心 : 	<span id="syzx"></span></li>
+    <li>采购人 : 	<span id="cgr"></span></li>
+    <li>使用人 : 	<span id="syr"></span></li>
+    <li>使用部门 : 	<span id="sybm"></span></li>
+    <li>存放地点 : 	<span id="cfdd"></span></li>
+    <li>部门责任人 : 	<span id="bmzrr"></span></li>
+    <li>资产状态 : 	<span id="zczt"></span></li>
+</ul>
+</body>
+</html>
