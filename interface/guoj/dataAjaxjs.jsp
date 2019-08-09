@@ -15,6 +15,8 @@
     DepartmentComInfo deptCominfo = new DepartmentComInfo();
 
     String gdzcbm = Util.null2String(request.getParameter("gdzcbm"));//固定资产编码
+    gdzcbm = gdzcbm.replace("“","").replace("”","");
+
 
     String sql = "select * from "+Constants.MODEL_TABLENAME_GDZC+" where gdzcbm = '"+gdzcbm+"'";
     bs.writeLog("移动建模扫码查询资产卡片信息sql:"+sql);
@@ -66,6 +68,7 @@
             "'zclb':'"+zclb+"'," +
             "'zclx':'"+getZclxmc(zclx)+"'," +
             "'ggxh':'"+ggxh+"'," +
+            "'gdzcbm':'"+gdzcbm+"'," +
             "'gzrq':'"+gzrq+"'," +
             "'syzx':'"+getSszx(syzx)+"'," +
             "'cgr':'"+resourceComInfo.getLastname(cgr)+"'," +

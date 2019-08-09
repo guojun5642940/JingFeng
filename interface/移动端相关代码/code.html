@@ -4,11 +4,9 @@
 
     <script>
 
-        // Mobile_NS.scanQRCode(function(result){
-        //     alert(result);
-        // });
-
-        setZCinfo("001-GD-ZC0010003");
+        Mobile_NS.scanQRCode(function(result){
+            setZCinfo("001-GD-ZC0010003");
+        });
         function setZCinfo(gdzcbm){
             if(gdzcbm == null || gdzcbm == "" || gdzcbm == undefined){
                 Mobile_NS.Alert("固定资产编码获取错误");
@@ -38,7 +36,7 @@
                     var bmzrr = json.bmzrr;
                     var zczt = json.zczt;
 
-                    $("#gdzcbm").html(gdzcbm);
+                    $("#gdzcbm").html(json.gdzcbm);
                     $("#gsmc").html(gsmc);
                     $("#zclb").html(zclb);
                     $("#zclx").html(zclx);
@@ -84,3 +82,77 @@
 </ul>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--1、固定资产盘点-->
+<html>
+<script>
+    /*页面加载*/
+    Mobile_NS.ajax(
+        "/interface/guoj/getCheckState.jsp",
+        {},
+        function(responseText){
+            var json = eval("("+responseText+")");
+            var checkstate = json.checkstate;
+            if(checkstate != "1"){
+                Mobile_NS.Alert("盘点功能未开启",false,function (){
+                    Mobile_NS.backPage();
+                });
+            }
+        }
+    );
+
+
+
+
+    /*点击资产正确*/
+    var gdzcbm = $("#gdzcbm").html();
+    if(gdzcbm == ""){
+        Mobile_NS.Alert("请扫码需要盘点的资产");
+    }else{
+        Mobile_NS.Confirm("确定资产正确？", "提示", ["确认",function(){
+            Mobile_NS.ajax(
+                "/interface/guoj/ensureState.jsp",
+                {gdzcbm : gdzcbm},
+                function(responseText){
+                    var json = eval("("+responseText+")");
+                    var modeDataId = json.modeDataId;
+                    if(Number(modeDataId) > 0){
+                        Mobile_NS.Alert("操作成功");
+                    }else{
+                        Mobile_NS.Alert("操作失败，请联系管理员");
+                    }
+                }
+            );
+        }],["取消", function(){}]);
+    }
+</script>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

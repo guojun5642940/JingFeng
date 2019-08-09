@@ -62,6 +62,11 @@ public class Constants {
      */
     public static final String MODEID_GDZC = "23";
 
+    /**
+     * 固定资产盘点记录-建模-MODEID
+     */
+    public static final String MODEID_GDZC_CHECKSTATE = "25";
+
 
     /**
      * 固定资产采购申请流程-发起节点nodeid
