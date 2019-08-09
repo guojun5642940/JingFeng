@@ -11,10 +11,7 @@
 
 <%
     BaseBean bs = new BaseBean();
-    bs.writeLog("22mmmmmm");
     FormModeHandler modeHandler = new FormModeHandler();
-    bs.writeLog("33mmmmmm");
-    /*
     RecordSet rs = new RecordSet();
     int modeDataId = 0;
     String gdzcbm = Util.null2String(request.getParameter("gdzcbm"));//固定资产编码
@@ -65,8 +62,7 @@
         formDataMap.put("zczt" ,zczt);
         formDataMap.put("checkDate", TimeUtil.getCurrentTimeString());
         formDataMap.put("dataState","1");
-        FormModeHandler modeHandler = new FormModeHandler();
         modeDataId = modeHandler.saveModeData(Constants.MODEID_GDZC_CHECKSTATE,"1",formDataMap,"");
     }
-    out.print("{'modeDataId':'"+modeDataId+"'}");*/
+    out.print("{'modeDataId':'"+modeDataId+"'}");
 %>
