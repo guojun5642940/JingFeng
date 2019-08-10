@@ -19,8 +19,4 @@
         sql = "insert into uf_checkstate (checkstate) values ('"+state+"')";
     }
     rs.execute(sql);
-
-    if("0".equals(state)){
-        rs.execute("update uf_checkReport set dataState = '0' ");
-    }
 %>

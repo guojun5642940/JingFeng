@@ -60,7 +60,7 @@
             zczt = "在库";
         }else if("1".equals(zczt)){
             zczt = "在用";
-        }else if("1".equals(zczt)){
+        }else if("2".equals(zczt)){
             zczt = "报废";
         }
     }

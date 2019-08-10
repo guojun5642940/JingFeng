@@ -106,7 +106,7 @@
         {},
         function(responseText){
             var json = eval("("+responseText+")");
-            var checkstate = json.checkstate;
+            var checkstate = json.result;
             if(checkstate != "1"){
                 Mobile_NS.Alert("盘点功能未开启",false,function (){
                     Mobile_NS.backPage();
@@ -129,8 +129,8 @@
                 {gdzcbm : gdzcbm},
                 function(responseText){
                     var json = eval("("+responseText+")");
-                    var modeDataId = json.modeDataId;
-                    if(Number(modeDataId) > 0){
+                    var isSuccess = json.isSuccess;
+                    if(isSuccess == "1"){
                         Mobile_NS.Alert("操作成功");
                     }else{
                         Mobile_NS.Alert("操作失败，请联系管理员");

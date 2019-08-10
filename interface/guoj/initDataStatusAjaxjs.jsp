@@ -10,19 +10,16 @@
 
 
 <%
+    boolean isSuccess = true;
     BaseBean bs = new BaseBean();
     FormModeHandler modeHandler = new FormModeHandler();
     RecordSet rs = new RecordSet();
+    RecordSet delRs = new RecordSet();
     int modeDataId = 0;
-    String gdzcbm = Util.null2String(request.getParameter("gdzcbm"));//固定资产编码
-    gdzcbm = gdzcbm.replace("“","").replace("”","");
-    String sql = "update "+Constants.MODEL_TABLENAME_GDZC+" set pdzt = '1'  where gdzcbm = '"+gdzcbm+"'";
-    boolean isSuccess = rs.execute(sql);
-    bs.writeLog("移动建模扫码盘点资产卡片信息sql:"+sql);
-    out.print("{'isSuccess':'"+(isSuccess?"1":"0")+"'}");
-//    String sql = "select * from "+Constants.MODEL_TABLENAME_GDZC+" where gdzcbm = '"+gdzcbm+"'";
-//    bs.writeLog("移动建模扫码盘点资产卡片信息sql:"+sql);
-    /*rs.execute(sql);
+    String ids = "";
+
+    String sql = "select * from "+Constants.MODEL_TABLENAME_GDZC+" where zczt in ('0','1')";
+    rs.execute(sql);
     String gsmc = "";
     String zclb = "";
     String zclx = "";
@@ -35,7 +32,10 @@
     String cfdd = "";
     String bmzrr = "";
     String zczt = "";
-    if(rs.next()){
+    String gdzcbm = "";
+    String pdzt = "";
+
+    while(rs.next()){
         gsmc = Util.null2String(rs.getString("gsmc"));
         zclb = Util.null2String(rs.getString("zclb"));
         zclx = Util.null2String(rs.getString("zclx"));
@@ -48,6 +48,8 @@
         cfdd = Util.null2String(rs.getString("cfdd"));
         bmzrr = Util.null2String(rs.getString("bmzrr"));
         zczt = Util.null2String(rs.getString("zczt"));
+        gdzcbm = Util.null2String(rs.getString("gdzcbm"));
+        pdzt = Util.null2String(rs.getString("pdzt"),"0");
 
         Map<String, String> formDataMap = new HashMap<>();
         formDataMap.put("gsmc" ,gsmc);
@@ -63,8 +65,26 @@
         formDataMap.put("cfdd" ,cfdd);
         formDataMap.put("bmzrr" ,bmzrr);
         formDataMap.put("zczt" ,zczt);
+        formDataMap.put("pdzt" ,pdzt);
         formDataMap.put("checkDate", TimeUtil.getCurrentTimeString());
-        formDataMap.put("dataState","1");
         modeDataId = modeHandler.saveModeData(Constants.MODEID_GDZC_CHECKSTATE,"1",formDataMap,"");
-    }*/
+
+        if(modeDataId > 0) {
+            ids += ("," + modeDataId);//已成功数据
+        }else{
+            if(ids.length()>0){
+                ids = ids.substring(1);
+            }
+            //删除已经成功数据
+            isSuccess = false;
+            sql = "delete from uf_checkReport where id in ("+ids+")";
+            delRs.execute(sql);
+            break;
+        }
+    }
+    if(isSuccess){
+        //数据同步成功后将资产卡片所有状态更新为未盘点
+        rs.execute("update "+Constants.MODEL_TABLENAME_GDZC+" set pdzt = '0' ");
+    }
+    out.print("{'isSuccess':'"+(isSuccess?"1":"0")+"','gdzcbm':'"+gdzcbm+"'}");
 %>
