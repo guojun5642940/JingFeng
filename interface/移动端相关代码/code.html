@@ -3,9 +3,8 @@
 <html>
 
     <script>
-
         Mobile_NS.scanQRCode(function(result){
-            setZCinfo("001-GD-ZC0010003");
+            setZCinfo(result);
         });
         function setZCinfo(gdzcbm){
             if(gdzcbm == null || gdzcbm == "" || gdzcbm == undefined){
@@ -35,6 +34,7 @@
                     var cfdd = json.cfdd;
                     var bmzrr = json.bmzrr;
                     var zczt = json.zczt;
+                    var pdzt = json.pdzt;
 
                     $("#gdzcbm").html(json.gdzcbm);
                     $("#gsmc").html(gsmc);
@@ -49,6 +49,7 @@
                     $("#cfdd").html(cfdd);
                     $("#bmzrr").html(bmzrr);
                     $("#zczt").html(zczt);
+                    $("#pdzt").html(pdzt);
                 }
             );
 
@@ -79,6 +80,7 @@
     <li>存放地点 : 	<span id="cfdd"></span></li>
     <li>部门责任人 : 	<span id="bmzrr"></span></li>
     <li>资产状态 : 	<span id="zczt"></span></li>
+    <li>盘点状态 : 	<span id="pdzt"></span></li>
 </ul>
 </body>
 </html>

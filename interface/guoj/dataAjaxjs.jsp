@@ -34,6 +34,7 @@
     String cfdd = "";
     String bmzrr = "";
     String zczt = "";
+    String pdzt = "";
     if(rs.next()){
         gsmc = Util.null2String(rs.getString("gsmc"));
         zclb = Util.null2String(rs.getString("zclb"));
@@ -47,6 +48,7 @@
         cfdd = Util.null2String(rs.getString("cfdd"));
         bmzrr = Util.null2String(rs.getString("bmzrr"));
         zczt = Util.null2String(rs.getString("zczt"));
+        pdzt = Util.null2String(rs.getString("pdzt"));
         queryFlag = "1";
 
 
@@ -63,6 +65,12 @@
         }else if("2".equals(zczt)){
             zczt = "报废";
         }
+
+        if("1".equals(pdzt)){
+            pdzt = "已盘点";
+        }else{
+            pdzt = "未盘点";
+        }
     }
     String result = "{'gsmc':'"+getDwmc(gsmc)+"'," +
             "'zclb':'"+zclb+"'," +
@@ -77,6 +85,7 @@
             "'cfdd':'"+cfdd+"'," +
             "'bmzrr':'"+resourceComInfo.getLastname(bmzrr)+"'," +
             "'zczt':'"+zczt+"'," +
+            "'pdzt':'"+pdzt+"'," +
             "'queryFlag':'"+queryFlag+"'}";
     out.print(result);
 %>
