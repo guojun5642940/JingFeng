@@ -28,7 +28,7 @@ public class ReturnService  extends BaseBean implements FixedAssetsServiceIfr {
         RecordSet rsUpdate = new RecordSet();
 
         try {
-            String updateSql = "update "+ Constants.MODEL_TABLENAME_GDZC+" set zczt = '0',syr='',sybm='',syzx='',lyrq='' where gdzcbm = '"+gdzcbm+"'";
+            String updateSql = "update "+ Constants.MODEL_TABLENAME_GDZC+" set zczt = '0',syr='',sybm='',syzx='',lyrq='' where id = '"+gdzcbm+"'";
             writeLog("ReturnService-updateSql["+requestId+"]+"+updateSql);
             boolean isSuccess = rsUpdate.execute(updateSql);
             if(!isSuccess){
