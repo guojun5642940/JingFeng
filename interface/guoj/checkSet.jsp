@@ -2,6 +2,7 @@
 <%@ include file="/systeminfo/init_wev8.jsp" %>
 <%@ page import="weaver.conn.RecordSet"%>
 <%@ page import="weaver.general.Util,weaver.rtx.RTXConfig" %>
+<%@ page import="weaver.general.TimeUtil" %>
 <jsp:useBean id="RecordSet" class="weaver.conn.RecordSet" scope="page"/>
 <jsp:useBean id="rtxConfig" class="weaver.rtx.RTXConfig" scope="page"/>
 <jsp:useBean id="ResourceComInfo" class="weaver.hrm.resource.ResourceComInfo" scope="page" />
@@ -44,6 +45,8 @@
     String checkstate = "";
     String ksrq = "";
     String jsrq = "";
+    String nf = "";
+    String cs = "";
     RecordSet rs = new RecordSet();
     String sql = "select * from uf_checkstate";
     rs.execute(sql);
@@ -51,8 +54,13 @@
         checkstate = Util.null2String(rs.getString("checkstate"));
         ksrq = Util.null2String(rs.getString("startDate"));
         jsrq = Util.null2String(rs.getString("endDate"));
+        nf = Util.null2String(rs.getString("nf"));
+        cs = Util.null2String(rs.getString("cs"));
     }
-
+    if("".equals(nf)){
+        nf = TimeUtil.getCurrentDateString().substring(0,4);
+    }
+    int temp = Util.getIntValue(nf);
 %>
 <BODY>
 <%@ include file="/systeminfo/TopTitle_wev8.jsp" %>
@@ -81,8 +89,8 @@
                                         <TR class=Title>
                                             <td align="left" style="width: 43px;"><img src="/js/tabs/images/nav/mnav12_wev8.png"/>盘点设置</td>
                                             <td align="right" style="padding-right: 10px;">
-                                                <input type="button" value="盘点状态初始化" class='e8_btn_top middle' onclick="initDataStatus()">
-                                                <input type="button" value="保存时间" class='e8_btn_top middle' onclick="saveTime()">
+                                                <%--<input type="button" value="盘点状态初始化" class='e8_btn_top middle' onclick="initDataStatus()">
+                                                <input type="button" value="保存设置" class='e8_btn_top middle' onclick="saveTime()">--%>
                                             </td>
                                         </TR>
                                         <TR class=Spacing><TD class=Line colSpan=2></TD></TR>
@@ -90,6 +98,33 @@
                                             <td>盘点状态</td>
                                             <td class=Field>
                                                 <INPUT type="checkbox" tzCheckbox="true" class=InputStyle name="checkState" id="checkState" value="<%=checkstate%>" >
+                                            </td>
+                                        </tr>
+                                        <TR class=Spacing><TD class=Line colSpan=2></TD></TR>
+                                        <tr >
+                                            <td>盘点年份</td>
+                                            <td class=Field>
+                                                <select id="nf" name="nf">
+                                                    <%
+                                                        for(int i = temp-5;i<temp+5;i++){
+                                                            %>
+                                                                <option value="<%=i%>" <%if(nf.equals(i+"")){%> selected="selected" <%}%> ><%=i%></option>
+
+                                                            <%
+                                                        }
+                                                    %>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <TR class=Spacing><TD class=Line colSpan=2></TD></TR>
+                                        <tr >
+                                            <td>盘点次数</td>
+                                            <td class=Field>
+                                                <select id="cs" name="cs">
+                                                    <option value=""  <%if(cs.equals("")) {%> selected="selected" <%}%> >&nbsp;</option>
+                                                    <option value="1" <%if(cs.equals("1")){%> selected="selected" <%}%> >1</option>
+                                                    <option value="2" <%if(cs.equals("2")){%> selected="selected" <%}%> >2</option>
+                                                </select>
                                             </td>
                                         </tr>
                                         <TR class=Spacing><TD class=Line colSpan=2></TD></TR>
@@ -103,6 +138,13 @@
                                                 <input type="hidden" id="jsrq" name="jsrq" value="<%=jsrq %>" _mindate="" _maxdate="" class="wuiDate" _callback="" _isrequired="yes">
                                                 <button class="calendar" type="button" name="enddateReleBtn_Autogrt&quot;" id="enddateReleBtn_Autogrt&quot;" onclick="_gdt('jsrq', 'enddateReleSpan_Autogrt', '','yes');"></button>
                                                 <span id="enddateReleSpan_Autogrt" name="enddateReleSpan_Autogrt"><%=jsrq %></span><span id="enddateReleSpan_Autogrtimg" name="enddateReleSpan_Autogrtimg"></span>
+                                            </td>
+                                        </tr>
+                                        <TR class=Spacing><TD class=Line colSpan=2></TD></TR>
+                                        <tr >
+                                            <td colspan="2">
+                                                &nbsp;&nbsp;<input type="button" value="盘点状态初始化" class='e8_btn_top middle' onclick="initDataStatus()">
+                                                <input type="button" value="保存设置" class='e8_btn_top middle' onclick="saveTime()">
                                             </td>
                                         </tr>
                                         <TR class=Spacing><TD class=Line colSpan=2></TD></TR>
@@ -186,10 +228,13 @@
             });
         });
     }
-    //保存时间
+    //保存设置
     function saveTime(){
         var ksrq = $("#ksrq").val();
         var jsrq = $("#jsrq").val();
+        var nf = $("#nf").find("option:selected").val();
+        var cs = $("#cs").find("option:selected").val();
+
         if((ksrq == "" && jsrq !="") || (ksrq != "" && jsrq =="")){
             Dialog.alert("时间段只能同时设置或者同时为空");
             return;
@@ -197,7 +242,7 @@
         jQuery.ajax({
             type:"POST",
             url:"/interface/guoj/setCheckDateAjaxjs.jsp",
-            data:{"ksrq":ksrq,"jsrq":jsrq},
+            data:{"ksrq":ksrq,"jsrq":jsrq,"nf":nf,"cs":cs},
             success:function(res){
                 var json = eval("("+res+")");
                 var isSuccess = json.isSuccess;
@@ -205,6 +250,7 @@
                     Dialog.alert("数据保存错误，请联系管理员");
                 }else{
                     Dialog.alert("保存成功");
+                    location.reload();
                 }
             },
             error:function(e){}

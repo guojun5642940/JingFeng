@@ -34,6 +34,9 @@
     String zczt = "";
     String gdzcbm = "";
     String pdzt = "";
+    String nf = getNf();
+    String cs = getCs();
+    String pdr = "";
 
     while(rs.next()){
         gsmc = Util.null2String(rs.getString("gsmc"));
@@ -50,6 +53,7 @@
         zczt = Util.null2String(rs.getString("zczt"));
         gdzcbm = Util.null2String(rs.getString("gdzcbm"));
         pdzt = Util.null2String(rs.getString("pdzt"),"0");
+        pdr = Util.null2String(rs.getString("pdr"));
 
         Map<String, String> formDataMap = new HashMap<>();
         formDataMap.put("gsmc" ,gsmc);
@@ -67,6 +71,10 @@
         formDataMap.put("zczt" ,zczt);
         formDataMap.put("pdzt" ,pdzt);
         formDataMap.put("checkDate", TimeUtil.getCurrentTimeString());
+        formDataMap.put("nf" ,nf);
+        formDataMap.put("cs" ,cs);
+        formDataMap.put("pdr" ,pdr);
+
         modeDataId = modeHandler.saveModeData(Constants.MODEID_GDZC_CHECKSTATE,"1",formDataMap,"");
 
         if(modeDataId > 0) {
@@ -87,4 +95,29 @@
         rs.execute("update "+Constants.MODEL_TABLENAME_GDZC+" set pdzt = '0' ");
     }
     out.print("{'isSuccess':'"+(isSuccess?"1":"0")+"','gdzcbm':'"+gdzcbm+"'}");
+%>
+
+
+<%!
+    public String getNf(){
+        RecordSet rs = new RecordSet();
+        String result = "";
+        String sql = "select nf from uf_checkstate";
+        rs.execute(sql);
+        if(rs.next()){
+            result = Util.null2String(rs.getString("nf"));
+        }
+        return result;
+    }
+
+    public String getCs(){
+        RecordSet rs = new RecordSet();
+        String result = "";
+        String sql = "select cs from uf_checkstate";
+        rs.execute(sql);
+        if(rs.next()){
+            result = Util.null2String(rs.getString("cs"));
+        }
+        return result;
+    }
 %>

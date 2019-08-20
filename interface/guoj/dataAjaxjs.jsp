@@ -35,6 +35,7 @@
     String bmzrr = "";
     String zczt = "";
     String pdzt = "";
+    String pdr = "";
     if(rs.next()){
         gsmc = Util.null2String(rs.getString("gsmc"));
         zclb = Util.null2String(rs.getString("zclb"));
@@ -47,6 +48,7 @@
         sybm = Util.null2String(rs.getString("sybm"));
         cfdd = Util.null2String(rs.getString("cfdd"));
         bmzrr = Util.null2String(rs.getString("bmzrr"));
+        pdr = Util.null2String(rs.getString("pdr"));
         zczt = Util.null2String(rs.getString("zczt"));
         pdzt = Util.null2String(rs.getString("pdzt"));
         queryFlag = "1";
@@ -84,6 +86,7 @@
             "'sybm':'"+deptCominfo.getDepartmentname(sybm)+"'," +
             "'cfdd':'"+cfdd+"'," +
             "'bmzrr':'"+resourceComInfo.getLastname(bmzrr)+"'," +
+            "'pdr':'"+resourceComInfo.getLastname(pdr)+"'," +
             "'zczt':'"+zczt+"'," +
             "'pdzt':'"+pdzt+"'," +
             "'queryFlag':'"+queryFlag+"'}";

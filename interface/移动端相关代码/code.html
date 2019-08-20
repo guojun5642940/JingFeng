@@ -35,6 +35,7 @@
                     var bmzrr = json.bmzrr;
                     var zczt = json.zczt;
                     var pdzt = json.pdzt;
+                    var pdr = json.pdr;
 
                     $("#gdzcbm").html(json.gdzcbm);
                     $("#gsmc").html(gsmc);
@@ -50,6 +51,7 @@
                     $("#bmzrr").html(bmzrr);
                     $("#zczt").html(zczt);
                     $("#pdzt").html(pdzt);
+                    $("#pdr").html(pdr);
                 }
             );
 
@@ -80,6 +82,7 @@
     <li>存放地点 : 	<span id="cfdd"></span></li>
     <li>部门责任人 : 	<span id="bmzrr"></span></li>
     <li>资产状态 : 	<span id="zczt"></span></li>
+    <li>盘点人 : 	<span id="pdr"></span></li>
     <li>盘点状态 : 	<span id="pdzt"></span></li>
 </ul>
 </body>
@@ -122,13 +125,14 @@
 
     /*点击资产正确*/
     var gdzcbm = $("#gdzcbm").html();
+    var nowUser = Mobile_NS.getCurrUser();
     if(gdzcbm == ""){
         Mobile_NS.Alert("请扫码需要盘点的资产");
     }else{
         Mobile_NS.Confirm("确定资产正确？", "提示", ["确认",function(){
             Mobile_NS.ajax(
                 "/interface/guoj/ensureState.jsp",
-                {gdzcbm : gdzcbm},
+                {gdzcbm : gdzcbm,nowUser:nowUser},
                 function(responseText){
                     var json = eval("("+responseText+")");
                     var isSuccess = json.isSuccess;

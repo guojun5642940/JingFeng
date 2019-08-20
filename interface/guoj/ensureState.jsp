@@ -15,8 +15,9 @@
     RecordSet rs = new RecordSet();
     int modeDataId = 0;
     String gdzcbm = Util.null2String(request.getParameter("gdzcbm"));//固定资产编码
+    String nowUser = Util.null2String(request.getParameter("nowUser"));
     gdzcbm = gdzcbm.replace("“","").replace("”","");
-    String sql = "update "+Constants.MODEL_TABLENAME_GDZC+" set pdzt = '1'  where gdzcbm = '"+gdzcbm+"'";
+    String sql = "update "+Constants.MODEL_TABLENAME_GDZC+" set pdzt = '1',pdr = '"+nowUser+"'  where gdzcbm = '"+gdzcbm+"'";
     boolean isSuccess = rs.execute(sql);
     bs.writeLog("移动建模扫码盘点资产卡片信息sql:"+sql);
     out.print("{'isSuccess':'"+(isSuccess?"1":"0")+"'}");
