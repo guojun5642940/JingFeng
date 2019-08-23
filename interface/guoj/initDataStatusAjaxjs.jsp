@@ -92,7 +92,7 @@
     }
     if(isSuccess){
         //数据同步成功后将资产卡片所有状态更新为未盘点
-        rs.execute("update "+Constants.MODEL_TABLENAME_GDZC+" set pdzt = '0' ");
+        rs.execute("update "+Constants.MODEL_TABLENAME_GDZC+" set pdzt = '0',pdr = '' ");
     }
     out.print("{'isSuccess':'"+(isSuccess?"1":"0")+"','gdzcbm':'"+gdzcbm+"'}");
 %>
