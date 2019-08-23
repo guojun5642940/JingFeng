@@ -30,9 +30,10 @@ public class AllocationApplicationService extends BaseBean implements FixedAsset
         String xsybm = Util.null2String(dataMap.get("xsybm".toLowerCase()).toString());
         String xsyzx = Util.null2String(dataMap.get("xsyzx".toLowerCase()).toString());
         String fqrq = Util.null2String(dataMap.get("fqrq".toLowerCase()).toString());
+        String cfdd = Util.null2String(dataMap.get("cfdd".toLowerCase()).toString());
 
         String sql = "update "+ Constants.MODEL_TABLENAME_GDZC +" set syr = '"+xsyr+"'," +
-                "sybm='"+xsybm+"',lyrq='"+fqrq+"',syzx='"+xsyzx+"' where id = '"+gdzcm+"' ";
+                "sybm='"+xsybm+"',lyrq='"+fqrq+"',syzx='"+xsyzx+"',cfdd = '"+cfdd+"',cfdd='1' where id = '"+gdzcm+"' ";
         writeLog("sql-AllocationApplicationService:["+sql+"]");
         RecordSet rs = new RecordSet();
         try {
