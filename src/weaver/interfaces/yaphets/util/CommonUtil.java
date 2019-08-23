@@ -32,7 +32,7 @@ public class CommonUtil{
         if(!"".equals(assetsTypeCode)){
             result += "-"+assetsTypeCode;
         }
-        result = result.length()>=1?result.substring(1):result+"-";
+        result = (result.length()>=1?result.substring(1):result)+"-";
         String code = callProcedure("HrmQuerySeqByTypeString",result);
         return code;
     }
