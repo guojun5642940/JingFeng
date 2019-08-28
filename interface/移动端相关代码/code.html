@@ -126,9 +126,13 @@
     /*点击资产正确*/
     var gdzcbm = $("#gdzcbm").html();
     var nowUser = Mobile_NS.getCurrUser();
+    var pdzt = $("#pdzt").html();
     if(gdzcbm == ""){
         Mobile_NS.Alert("请扫码需要盘点的资产");
-    }else{
+    }else if(pdzt == "已盘点"){
+        Mobile_NS.Alert("该资产已盘点");
+    }else
+        {
         Mobile_NS.Confirm("确定资产正确？", "提示", ["确认",function(){
             Mobile_NS.ajax(
                 "/interface/guoj/ensureState.jsp",
