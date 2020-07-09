@@ -257,6 +257,30 @@
         });
     }
 
+
+
+
+
+
+    jQuery(document).ready(function(){
+        checkCustomize = function (){
+            var ksrq = $("#field7823").val()+" 00:00:00";
+            var jsrq = $("#field7824").val()+" 00:00:00";
+            var myDate = new Date();
+            var nowDate = myDate.toLocaleDateString().split('/').join('-')+" 00:00:00";
+
+            if((new Date(ksrq.replace(/-/g,"\/"))) < (new Date(nowDate.replace(/-/g,"\/")))){
+                Dialog.alert("错误：必须提前提报加班计划！");
+                return false;
+            }
+            if((new Date(jsrq.replace(/-/g,"\/"))) <= (new Date(ksrq.replace(/-/g,"\/")))){
+                Dialog.alert("错误：结束日期必须大于开始日期！");
+                return false;
+            }
+            return true;
+        };
+    });
+
 </script>
 <SCRIPT language="javascript"  src="/js/jquery/jquery-1.4.2.min_wev8.js"></script>
 <SCRIPT language="javascript"  src="/js/JSDateTime/WdatePicker_wev8.js"></script>
