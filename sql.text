@@ -154,7 +154,7 @@ AS
         ----INSERT
         IF NOT EXISTS(SELECT * FROM NumSeq WHERE Prefix=@Prefix)
         BEGIN
-                        INSERT INTO NumSeq(Prefix,Seq,LastDate) VALUES(UPPER(@Prefix),0,@Now)
+                        INSERT INTO NumSeq(Prefix,Seq,LastDate) VALUES(UPPER(@Prefix),2000,@Now)
         END
 
     --GET LastDate

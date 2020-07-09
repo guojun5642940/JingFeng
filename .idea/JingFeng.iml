@@ -5,19 +5,157 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://D:/jar/weaver/lib" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/Access_JDBC30.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/activation.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ant.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/axis.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/basic.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/bcmail-jdk14-132.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/bcprov-jdk14-132.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/bsh-2[1].0b4.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/c3p0-0.8.5.2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/c3p0-oracle-thin-extras-0.8.5.2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/castor.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-beanutils.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-codec-1.3.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-collections.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-configuration-1.5.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-dbcp-1.2.1.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-discovery.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-fileupload-1.3.1.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-fileupload.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-httpclient-3.1.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-io-1.3.1.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-lang.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-logging.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/commons-net-1.4.1.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/concurrent.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/csvjdbc.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/dom.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/dom4j.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ejb-15.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ezmorph-1.0.4.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/FontBox-0.1.0-dev.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/fontbox-1.5.0.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/freemarker-2.3.8.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/generic-axis1.3-api-100525.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/hessian.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/hivemind.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ibatis-common-2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ibatis-dao-2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ibatis-sqlmap-2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ifxjdbc221_CE.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/imap.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/itext-2.0.2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/j2ee-management-10.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jai_codec.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jai_core.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jakarta-oro-2.0.8.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jakarta-poi-1.9.0-dev-20021010.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/javamail-141.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/javassist.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jaws.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jaxen-core.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jaxen-jdom.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jaxrpc-15.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jaxrpc.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jaxws-api.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jca-15.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jce1_2_2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jconn2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jdbc2_0-stdext.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jdk12.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jdom.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jgroups-all.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jms-11.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jmx.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jndi.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jpa-15.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jsdk-15.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jsdk22.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jsf-12.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/json-lib-2.2.1-jdk13.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jsoup-1.6.1.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jspsmartupload.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jsr88.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jstl-11.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jta-101.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jta-spec1_0_1.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jtds-1.2.2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/jws-15.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/log4j-1.2.13.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/lucene-core-2.1.0.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/lucene-highlighter-2.1.0.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/mail.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/mailapi.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/mlibwrapper_jai.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/msbase.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/mssqlserver.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/msutil.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/mysql_both_uncomp.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/mysql-connector-java-3.1.11-bin.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ojdbc14.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/onlinedebug.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/Opta2000.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ora9iclasses12.zip!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/PDFBox-0.7.3.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/pdfbox-1.5.0.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/pinyin4j.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/poi-2.5.1-final-20040804.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/poi-3.6-20091214.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/poi-contrib-2.5.1-final-20040804.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/poi-scratchpad-2.5.1-final-20040804.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/pop3.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/portlet-10.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/proxool-0.9.0RC2.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/QRCode.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/quartz.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/quercus.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/resin-deploy.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/resin-util.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/resin.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/rt.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/saaj.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/sax.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/saxpath.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/script-10.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/smtp.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/sqljdbc4.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/sunjce_provider.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/tm-extractors-0.4.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/truezip-6.6.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/webbeans-16.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/webutil.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/WkJavaApi.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/wsdl4j.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/xalan.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/xbean-spring-3.7.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/xerces.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/xml-apis.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ddjdbc.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://D:/jar/weaver/lib" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/generic-axis1.3-api-100525.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ifxjdbc221_CE.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/weaver_lib/ddjdbc.jar!/Examples" />
         </SOURCES>
-        <jarDirectory url="file://D:/jar/weaver/lib" recursive="false" />
-        <jarDirectory url="file://D:/jar/weaver/lib" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/Downloads/weaver_lib/weaver" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Downloads/weaver_lib/weaver" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>
