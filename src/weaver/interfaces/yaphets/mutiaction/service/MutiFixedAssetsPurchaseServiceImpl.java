@@ -16,24 +16,29 @@ import weaver.workflow.workflow.WorkflowComInfo;
  *  @Date: 2020/11/4 23:07
  *  @Description: 固定资产采购流程-多明细
  */
-public class MutiFixedAssetsPurchaseServiceImpl extends BaseBean implements Action {
+public class MutiFixedAssetsPurchaseServiceImpl implements Action {
 
     private RequestComInfo requestComInfo;
     private WorkflowComInfo WorkflowComInfo;
+    private BaseBean bs;
 
-    @Override
-    public String execute(RequestInfo request) {
-        String workflowId = request.getWorkflowid();
-        String requestId = request.getRequestid();
+    public MutiFixedAssetsPurchaseServiceImpl() {
         try {
             requestComInfo = new RequestComInfo();
             WorkflowComInfo = new WorkflowComInfo();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        bs = new BaseBean();
+    }
+
+    @Override
+    public String execute(RequestInfo request) {
+        String workflowId = request.getWorkflowid();
+        String requestId = request.getRequestid();
         String requestName = requestComInfo.getRequestname(requestId);
         String workflowName = WorkflowComInfo.getWorkflowname(workflowId);
-        writeLog("ActionInterceptorService--进入action--workflowId：{"+workflowId+"},workflowName：{"+workflowName+"},requestId：{"+requestId+"},requestName：{"+requestName+"}");
+        bs.writeLog("MutiFixedAssetsPurchaseServiceImpl--进入action--workflowId：{"+workflowId+"},workflowName：{"+workflowName+"},requestId：{"+requestId+"},requestName：{"+requestName+"}");
 
         RecordSet rs = new RecordSet();
         RecordSet rsUpdate = new RecordSet();
@@ -70,9 +75,9 @@ public class MutiFixedAssetsPurchaseServiceImpl extends BaseBean implements Acti
                     zclbCode = "DZ";
                 }
                 gdzcbm = CommonUtil.createAssetsCode(gsmc,zclbCode,zclx);
-                writeLog("requestId:"+requestId+"-明细id"+id+"-"+"获取流水号："+gdzcbm);
+                bs.writeLog("requestId:"+requestId+"-明细id"+id+"-"+"获取流水号："+gdzcbm);
                 String updateSql = "update "+ Constants.WORKFLOW_TABLENAME_BATCH_PURCHASE +"_dt1 set gdzcbm = '"+gdzcbm+"' where id = '"+id+"' ";
-                writeLog("updateSql="+updateSql);
+                bs.writeLog("updateSql="+updateSql);
                 rsUpdate.execute(updateSql);
             }
             GdzcDto gdzcDto = new GdzcDto();
@@ -94,7 +99,7 @@ public class MutiFixedAssetsPurchaseServiceImpl extends BaseBean implements Acti
             gdzcDto.setGmdj(gmdj);
             gdzcDto.setZctp(tpsc);
             int modeDataId = gdzcDto.saveModeData();
-            writeLog("requestId：{"+requestId+"},modeDataId:"+modeDataId);
+            bs.writeLog("requestId：{"+requestId+"},modeDataId:"+modeDataId);
         }
         return SUCCESS;
     }
