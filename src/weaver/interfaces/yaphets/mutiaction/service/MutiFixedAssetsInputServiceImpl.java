@@ -13,16 +13,15 @@ import weaver.workflow.workflow.WorkflowComInfo;
 
 /**
  *  @author: guojun
- *  @Date: 2020/11/4 23:07
- *  @Description: 固定资产采购流程-多明细
+ *  @Date: 2020/11/7 13:56
+ *  @Description:批量录入
  */
-public class MutiFixedAssetsPurchaseServiceImpl implements Action {
-
+public class MutiFixedAssetsInputServiceImpl implements Action {
     private RequestComInfo requestComInfo;
-    private WorkflowComInfo WorkflowComInfo;
+    private weaver.workflow.workflow.WorkflowComInfo WorkflowComInfo;
     private BaseBean bs;
 
-    public MutiFixedAssetsPurchaseServiceImpl() {
+    public MutiFixedAssetsInputServiceImpl() {
         try {
             requestComInfo = new RequestComInfo();
             WorkflowComInfo = new WorkflowComInfo();
@@ -38,7 +37,7 @@ public class MutiFixedAssetsPurchaseServiceImpl implements Action {
         String requestId = request.getRequestid();
         String requestName = requestComInfo.getRequestname(requestId);
         String workflowName = WorkflowComInfo.getWorkflowname(workflowId);
-        bs.writeLog("MutiFixedAssetsPurchaseServiceImpl--进入action--workflowId：{"+workflowId+"},workflowName：{"+workflowName+"},requestId：{"+requestId+"},requestName：{"+requestName+"}");
+        bs.writeLog("MutiFixedAssetsInputServiceImpl--进入action--workflowId：{"+workflowId+"},workflowName：{"+workflowName+"},requestId：{"+requestId+"},requestName：{"+requestName+"}");
 
         RecordSet rs = new RecordSet();
         RecordSet rsUpdate = new RecordSet();
@@ -54,6 +53,7 @@ public class MutiFixedAssetsPurchaseServiceImpl implements Action {
             String	ggxh = Util.null2String(rs.getString("ggxh")); //规格型号
             String	gmdj = Util.null2String(rs.getString("gmdj")); //购买单价
             String	gsmc = Util.null2String(rs.getString("gsmc")); //公司名称
+            String	gzny = Util.null2String(rs.getString("gzny")); //购置年份
             String	gzrq = Util.null2String(rs.getString("gzrq")); //购置日期
             String	jldw = Util.null2String(rs.getString("jldw")); //计量单位
             String	lyrq = Util.null2String(rs.getString("lyrq")); //领用日期

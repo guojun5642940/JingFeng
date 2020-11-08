@@ -29,6 +29,7 @@ public class GdzcDto {
     private String zczt;
     private String gmdj;
     private String zctp;
+    private String ssbk;
 
     public int saveModeData(){
         FormModeHandler modeHandler = new FormModeHandler();
@@ -50,8 +51,17 @@ public class GdzcDto {
         formDataMap.put("zczt" ,this.getZczt());
         formDataMap.put("gmdj" ,this.getGmdj());
         formDataMap.put("zctp" ,this.getZctp());
+        formDataMap.put("ssbk" ,this.getSsbk());
         int modeDataId = modeHandler.saveModeData(Constants.MODEID_GDZC,"1",formDataMap,"");
         return modeDataId;
+    }
+
+    public String getSsbk() {
+        return ssbk;
+    }
+
+    public void setSsbk(String ssbk) {
+        this.ssbk = ssbk;
     }
 
     public String getZctp() {
