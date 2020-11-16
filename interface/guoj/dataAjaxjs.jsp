@@ -17,11 +17,11 @@
     String gdzcbm = Util.null2String(request.getParameter("gdzcbm"));//固定资产编码
     gdzcbm = gdzcbm.replace("“","").replace("”","");
 
-
     String sql = "select * from "+Constants.MODEL_TABLENAME_GDZC+" where gdzcbm = '"+gdzcbm+"'";
     bs.writeLog("移动建模扫码查询资产卡片信息sql:"+sql);
     rs.execute(sql);
     String queryFlag = "0";
+    String id = "";
     String gsmc = "";
     String zclb = "";
     String zclx = "";
@@ -36,7 +36,11 @@
     String zczt = "";
     String pdzt = "";
     String pdr = "";
+    String ssbk = "";
+    String zctp = "";
+    String picFileid = "";
     if(rs.next()){
+        id = Util.null2String(rs.getString("id"));
         gsmc = Util.null2String(rs.getString("gsmc"));
         zclb = Util.null2String(rs.getString("zclb"));
         zclx = Util.null2String(rs.getString("zclx"));
@@ -51,7 +55,12 @@
         pdr = Util.null2String(rs.getString("pdr"));
         zczt = Util.null2String(rs.getString("zczt"));
         pdzt = Util.null2String(rs.getString("pdzt"));
+        ssbk = Util.null2String(rs.getString("ssbk"));
+        zctp = Util.null2String(rs.getString("zctp"));
         queryFlag = "1";
+        if(!"".equalsIgnoreCase(zctp)){
+            picFileid = getImageFileid(zctp);
+        }
 
 
         if("0".equals(zclb)){
@@ -76,6 +85,7 @@
     }
     String result = "{'gsmc':'"+getDwmc(gsmc)+"'," +
             "'zclb':'"+zclb+"'," +
+            "'id':'"+id+"'," +
             "'zclx':'"+getZclxmc(zclx)+"'," +
             "'ggxh':'"+ggxh+"'," +
             "'gdzcbm':'"+gdzcbm+"'," +
@@ -89,6 +99,9 @@
             "'pdr':'"+resourceComInfo.getLastname(pdr)+"'," +
             "'zczt':'"+zczt+"'," +
             "'pdzt':'"+pdzt+"'," +
+            "'ssbk':'"+ssbk+"'," +
+            "'picFileid':'"+picFileid+"'," +
+            "'zctp':'"+zctp+"'," +
             "'queryFlag':'"+queryFlag+"'}";
     out.print(result);
 %>
@@ -142,7 +155,19 @@
         return result;
     }
 
-
-
-
+    /**
+     *  @author: guojun
+     *  @Date: 2020/11/10 21:57
+     *  @Description: 获取资产图片id
+     */
+    public String getImageFileid(String docid){
+        RecordSet rs = new RecordSet();
+        String result = "";
+        String sql = "select imagefileid from DocImageFile where docid = '"+docid+"'";
+        rs.execute(sql);
+        if(rs.next()){
+            result = Util.null2String(rs.getString("imagefileid"));
+        }
+        return result;
+    }
 %>

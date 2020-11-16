@@ -1,5 +1,6 @@
 package weaver.interfaces.yaphets;
 
+import weaver.interfaces.yaphets.util.DocUtil;
 import weaver.interfaces.yaphets.webservice.DocAttachment;
 import weaver.interfaces.yaphets.webservice.DocInfo;
 import weaver.interfaces.yaphets.webservice.docService.DocServicePortType;
@@ -22,19 +23,17 @@ import org.apache.axis.encoding.Base64;
 public class Test {
 
     public static void main(String[] args) throws Exception {
-        Test t = new Test();
-        DocServicePortTypeProxy proxy = new DocServicePortTypeProxy();
-        DocServicePortType service = proxy.getDocServicePortType();
-//        String session = t.getSession("sysadmin", "1", 0, "127.0.0.1");
+        DocUtil docUtil = new DocUtil();
+        String session = docUtil.getSession("sysadmin", "1", 0, "127.0.0.1");
 //        try {
 //            DocInfo doc =service.getDoc(147185,session);
 //            System.out.println(doc);
 //        } catch (RemoteException e) {
 //            e.printStackTrace();
 //        }
-//        int docid = t.createImageFile("/Users/guojun/Desktop/Test.jpg",session);
-
-
+        String path = "C:\\Users\\Administrator\\Desktop\\壁纸-13.jpg";
+        int docid = docUtil.createImageFile(path,"2.jpg",session);
+        System.out.println(docid);
 //        getFile("/Users/guojun/Downloads/apache-maven-3.5.4/");
 
     }

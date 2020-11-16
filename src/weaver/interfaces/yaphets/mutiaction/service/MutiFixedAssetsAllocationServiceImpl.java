@@ -58,8 +58,10 @@ public class MutiFixedAssetsAllocationServiceImpl implements Action {
             String	xsybm = Util.null2String(rs.getString("xsybm")); //现使用部门
             String	xsyr = Util.null2String(rs.getString("xsyr")); //现使用人
             String	xsyzx = Util.null2String(rs.getString("xsyzx")); //现使用中心
+            String 	xfzr = Util.null2String(rs.getString("xfzr")); //现使用中心
             String updateSql = "update "+ Constants.MODEL_TABLENAME_GDZC +" set syr = '"+xsyr+"'," +
-                    "sybm='"+xsybm+"',lyrq='"+fqrq+"',syzx='"+xsyzx+"',cfdd = '"+cfdd+"',zczt='1' where id = '"+gdzcbm+"' ";
+                    "sybm='"+xsybm+"',lyrq='"+fqrq+"',syzx='"+xsyzx+"',cfdd = '"+cfdd+"',zczt='1',bmzrr = '"+xfzr+"' where id = '"+gdzcbm+"' ";
+
             bs.writeLog("sql-MutiFixedAssetsAllocationServiceImpl:["+sql+"]");
             rsUpdate.execute(updateSql);
         }

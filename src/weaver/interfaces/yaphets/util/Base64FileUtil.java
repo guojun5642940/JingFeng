@@ -56,6 +56,13 @@ public class Base64FileUtil {
         return result.toString();
     }
 
+    public static void isChartPathExist(String dirPath) {
+        File file = new File(dirPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+    }
+
     public static InputStream base64ToInputStream(String base64) {
         ByteArrayInputStream stream;
         BASE64Decoder decoder = new BASE64Decoder();

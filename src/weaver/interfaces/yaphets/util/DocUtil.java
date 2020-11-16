@@ -1,6 +1,7 @@
 package weaver.interfaces.yaphets.util;
 
 import org.apache.axis.encoding.Base64;
+import weaver.general.BaseBean;
 import weaver.interfaces.yaphets.webservice.DocAttachment;
 import weaver.interfaces.yaphets.webservice.DocInfo;
 import weaver.interfaces.yaphets.webservice.docService.DocServicePortType;
@@ -77,9 +78,15 @@ public class DocUtil {
         doc.setDoccreaterid(1);//
         doc.setDoccreatertype(0);
         doc.setAccessorycount(1);
-        doc.setMaincategory(-1);//主目录id
-        doc.setSubcategory(-1);//分目录id
-        doc.setSeccategory(160);//子目录id
+
+        BaseBean bs = new BaseBean();
+        String maincategory = bs.getPropValue("jf","DOC_MAINCATEGORY");
+        String subcategory = bs.getPropValue("jf","DOC_SUBCATEGORY");
+        String seccategory = bs.getPropValue("jf","DOC_SECCATEGORY");
+
+        doc.setMaincategory(Integer.parseInt(maincategory));//主目录id
+        doc.setSubcategory(Integer.parseInt(subcategory));//分目录id
+        doc.setSeccategory(Integer.parseInt(seccategory));//子目录id
         doc.setOwnerid(1);
         doc.setDocStatus(1);
         doc.setId(0);

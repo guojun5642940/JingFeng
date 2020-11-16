@@ -76,7 +76,7 @@ public class MutiFixedAssetsPurchaseServiceImpl implements Action {
                 }
                 gdzcbm = CommonUtil.createAssetsCode(gsmc,zclbCode,zclx);
                 bs.writeLog("requestId:"+requestId+"-明细id"+id+"-"+"获取流水号："+gdzcbm);
-                String updateSql = "update "+ Constants.WORKFLOW_TABLENAME_BATCH_PURCHASE +"_dt1 set gdzcbm = '"+gdzcbm+"' where id = '"+id+"' ";
+                String updateSql = "update "+ mxTablename +"_dt1 set gdzcbm = '"+gdzcbm+"' where id = '"+id+"' ";
                 bs.writeLog("updateSql="+updateSql);
                 rsUpdate.execute(updateSql);
             }

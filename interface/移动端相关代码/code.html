@@ -1,64 +1,4 @@
 <!--1、固定资产查询-->
-<!--扫码按钮单击事件-->
-<html>
-
-    <script>
-        Mobile_NS.scanQRCode(function(result){
-            setZCinfo(result);
-        });
-        function setZCinfo(gdzcbm){
-            if(gdzcbm == null || gdzcbm == "" || gdzcbm == undefined){
-                Mobile_NS.Alert("固定资产编码获取错误");
-                return;
-            }
-
-            Mobile_NS.ajax(
-                "/interface/guoj/dataAjaxjs.jsp",
-                {gdzcbm : gdzcbm},
-                function(responseText){
-                    var json = eval("("+responseText+")");
-                    var queryFlag = json.queryFlag;
-                    if(queryFlag == "0"){
-                        Mobile_NS.Alert("未查到相关资产信息");
-                        return;
-                    }
-                    var gsmc = json.gsmc;
-                    var zclb = json.zclb;
-                    var zclx = json.zclx;
-                    var ggxh = json.ggxh;
-                    var gzrq = json.gzrq;
-                    var syzx = json.syzx;
-                    var cgr = json.cgr;
-                    var syr = json.syr;
-                    var sybm = json.sybm;
-                    var cfdd = json.cfdd;
-                    var bmzrr = json.bmzrr;
-                    var zczt = json.zczt;
-                    var pdzt = json.pdzt;
-                    var pdr = json.pdr;
-
-                    $("#gdzcbm").html(json.gdzcbm);
-                    $("#gsmc").html(gsmc);
-                    $("#zclb").html(zclb);
-                    $("#zclx").html(zclx);
-                    $("#ggxh").html(ggxh);
-                    $("#gzrq").html(gzrq);
-                    $("#syzx").html(syzx);
-                    $("#cgr").html(cgr);
-                    $("#syr").html(syr);
-                    $("#sybm").html(sybm);
-                    $("#cfdd").html(cfdd);
-                    $("#bmzrr").html(bmzrr);
-                    $("#zczt").html(zczt);
-                    $("#pdzt").html(pdzt);
-                    $("#pdr").html(pdr);
-                }
-            );
-
-        }
-    </script>
-</html>
-
 
 
 <html>
@@ -68,6 +8,8 @@
 <body>
 <input type="hidden" id="id" value="{id}">
 <input type="hidden" id="dbpage" value="{dbpage}">
+<input type="hidden" id="zctp">
+<input type="hidden" id="gdzcbmVal">
 <ul class="ul-fields">
     <li>资产编码（一级）公司名称 : <span id="gsmc"></span></li>
     <li>资产编码（二级）资产类别 : <span id="zclb"></span></li>
@@ -84,18 +26,83 @@
     <li>资产状态 : 	<span id="zczt"></span></li>
     <li>盘点人 : 	<span id="pdr"></span></li>
     <li>盘点状态 : 	<span id="pdzt"></span></li>
+    <li>所属板块 : 	<span id="ssbk"></span></li>
+    <li>资产图片 : 	<input type="button" value="查看大图" onclick="showImg()"></li>
 </ul>
+<div style="width:100%;" id="imgDiv"></div>
+<script>
+    function showImg(){
+        var picFileid = $("#zctp").val();
+        $u("/weaver/weaver.file.FileDownload?fileid="+picFileid);
+    }
+</script>
 </body>
 </html>
 
+<!--扫码按钮单击事件-->
+<html>
+<script>
+    Mobile_NS.scanQRCode(function(result){
+        setZCinfo(result);
+    });
+    function setZCinfo(gdzcbm){
+        if(gdzcbm == null || gdzcbm == "" || gdzcbm == undefined){
+            Mobile_NS.Alert("固定资产编码获取错误");
+            return;
+        }
+        Mobile_NS.ajax(
+            "/interface/guoj/dataAjaxjs.jsp",
+            {gdzcbm : gdzcbm},
+            function(responseText){
+                var json = eval("("+responseText+")");
+                var queryFlag = json.queryFlag;
+                if(queryFlag == "0"){
+                    Mobile_NS.Alert("未查到相关资产信息");
+                    return;
+                }
+                var gsmc = json.gsmc;
+                var zclb = json.zclb;
+                var zclx = json.zclx;
+                var ggxh = json.ggxh;
+                var gzrq = json.gzrq;
+                var syzx = json.syzx;
+                var cgr = json.cgr;
+                var syr = json.syr;
+                var sybm = json.sybm;
+                var cfdd = json.cfdd;
+                var bmzrr = json.bmzrr;
+                var zczt = json.zczt;
+                var ssbk = json.ssbk;
+                var pdzt = json.pdzt;
+                var pdr = json.pdr;
+                var picFileid = json.picFileid;
 
-
-
-
-
-
-
-
+                $("#gdzcbm").html(json.gdzcbm);
+                $("#gdzcbmVal").val(json.gdzcbmVal);
+                $("#gsmc").html(gsmc);
+                $("#zclb").html(zclb);
+                $("#zclx").html(zclx);
+                $("#ggxh").html(ggxh);
+                $("#gzrq").html(gzrq);
+                $("#syzx").html(syzx);
+                $("#cgr").html(cgr);
+                $("#syr").html(syr);
+                $("#sybm").html(sybm);
+                $("#cfdd").html(cfdd);
+                $("#bmzrr").html(bmzrr);
+                $("#zczt").html(zczt);
+                $("#ssbk").html(ssbk);
+                $("#pdzt").html(pdzt);
+                $("#pdr").html(pdr);
+                if(picFileid != ""){
+                    $("#zctp").val(picFileid);
+                    $("#imgDiv").html("<img src='/weaver/weaver.file.FileDownload?fileid="+picFileid+"' style='width: 100%;'/>");
+                }
+            }
+        );
+    }
+</script>
+</html>
 
 
 
@@ -119,9 +126,6 @@
             }
         }
     );
-
-
-
 
     /*点击资产正确*/
     var gdzcbm = $("#gdzcbm").html();
@@ -151,6 +155,98 @@
     }
 </script>
 
+
+
+<!--1、资产图片上传-->
+<script>
+    /*页面加载*/
+    Mobile_NS.ajax(
+        "/interface/guoj/roleCheck.jsp",
+        {nowUser:Mobile_NS.getCurrUser(),roleid:"ZCTPSC_ROLEID"},
+        function(responseText){
+            var json = eval("("+responseText+")");
+            var result = json.result;
+            if(result == 'true'){
+                Mobile_NS.Alert("无权限！",false,function (){
+                    Mobile_NS.backPage();
+                });
+            }
+        }
+    );
+
+    //点击上传图片按钮
+    var gdzcbm = $("#gdzcbm").html();
+    //获取选择图片的数量 photoEntryWrapcf0028b87b3843e08e06fc0820062a1b
+    var imgCount = $('#photoEntryWrapcf0028b87b3843e08e06fc0820062a1b').children('div').length-1;
+    if(gdzcbm == '' || gdzcbm == null || gdzcbm == undefined || gdzcbm == 'undefined'){
+        Mobile_NS.Alert("请扫码指定的固定资产");
+        return false;
+    }else if(imgCount == 0){
+        Mobile_NS.Alert("未选择需要上传的资产图片");
+        return false;
+    }else if(imgCount >= 2){
+        Mobile_NS.Alert("只能上传一张资产图片");
+        return false;
+    }else{
+        $("input[name^='fieldname_gdzcbm']")[0].value = gdzcbm;
+    }
+</script>
+
+
+
+
+<!--1、资产监控-->
+<script>
+    /*页面加载*/
+    Mobile_NS.ajax(
+        "/interface/guoj/roleCheck.jsp",
+        {nowUser:Mobile_NS.getCurrUser(),roleid:"ZCJK_ROLEID"},
+        function(responseText){
+            var json = eval("("+responseText+")");
+            var result = json.result;
+            if(result == 'true'){
+                Mobile_NS.Alert("无权限！",false,function (){
+                    Mobile_NS.backPage();
+                });
+            }
+        }
+    );
+
+    /*扫码后执行*/
+    Mobile_NS.scanQRCode(function(result){
+        setZCinfo(result);
+    });
+    function setZCinfo(gdzcbm){
+        if(gdzcbm == null || gdzcbm == "" || gdzcbm == undefined){
+            Mobile_NS.Alert("固定资产编码获取错误");
+            return;
+        }
+        Mobile_NS.ajax(
+            "/interface/guoj/dataAjaxjs.jsp",
+            {gdzcbm : gdzcbm},
+            function(responseText){
+                var json = eval("("+responseText+")");
+                var queryFlag = json.queryFlag;
+                if(queryFlag == "0"){
+                    Mobile_NS.Alert("未查到相关资产信息");
+                    return;
+                }
+                var id = json.id;
+                $u("/mobilemode/layout.jsp?appid=1&modelid=22&uitype=1&billid="+id);
+            }
+        );
+    }
+
+
+    /*编辑保存回调脚本-保存修改记录*/
+    var gdzcbm = $("input[name^='fieldname_gdzcbm']")[0].value;
+    var nowUser = Mobile_NS.getCurrUser();
+    Mobile_NS.ajax(
+        "/interface/guoj/addModifyRecord.jsp",
+        {gdzcbm : gdzcbm,nowUser:nowUser},
+        function(responseText){}
+    );
+</script>
 
 </html>
 
