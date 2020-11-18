@@ -3,6 +3,7 @@ package weaver.interfaces.yaphets.mutiaction;
 import weaver.interfaces.yaphets.util.Constants;
 import weaver.interfaces.yaphets.util.FormModeHandler;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,9 @@ import java.util.Map;
  *  @Date: 2020/11/4 23:21
  *  @Description: 固定资产对象
  */
-public class GdzcDto {
+public class GdzcDto implements Serializable {
+
+
     private String gsmc;
     private String zclb;
     private String zclx;

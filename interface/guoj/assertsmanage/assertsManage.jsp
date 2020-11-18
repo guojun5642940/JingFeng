@@ -64,61 +64,64 @@
 				    <%--<input type="button" value="导出全部" class='e8_btn_top middle' onclick="_xtable_getAllExcel()">--%>
 					<input type="button" value="批量转移" class='e8_btn_top middle' onclick="batchTransfer()">
 					<input type="text" id="searchInput" name=hrmName class="searchInput middle" value="<%=hrmName%>" /> &nbsp;&nbsp;
-					<span id="advancedSearch" class="advancedSearch">高级搜索</span>&nbsp;&nbsp;
+					<%--<span id="advancedSearch" class="advancedSearch">&nbsp;&nbsp;</span>--%>
 					<span title="菜單" class="cornerMenu"></span>
 				</td>
 			</tr>
 		</table>
 	</form>
 	<FORM id=weaver name=weaver method=post action='assertsManage.jsp'>
-		<div class="advancedSearchDiv" id="advancedSearchDiv">
-			<input type="hidden" name="ids" /> 
-			<input type="hidden" name="method" />
-			<wea:layout type="4col">
-				<wea:group context="常用条件">
-					<%--<wea:item>开始日期</wea:item>--%>
+		<%--<div class="advancedSearchDiv" id="advancedSearchDiv">--%>
+			<%--<input type="hidden" name="ids" /> --%>
+			<%--<input type="hidden" name="method" />--%>
+			<%--<wea:layout type="4col">--%>
+				<%--<wea:group context="常用条件">--%>
+					<%--<wea:item>使用人</wea:item>--%>
 					<%--<wea:item>--%>
-						<%--<span>--%>
-							<%--<BUTTON class=Calendar type="button" onclick="onShowDate1(swrqfromspan,swrqfrom)"></BUTTON> --%>
-							<%--<SPAN id=swrqfromspan></SPAN> --%>
-							<%--&nbsp;<input type="hidden"	name="swrqfrom" value="<%=swrqfrom%>"> - &nbsp;&nbsp;--%>
-							<%--<BUTTON class=Calendar type="button" onclick="onShowDate1(swrqtospan,swrqto)"></BUTTON> --%>
-							<%--<SPAN id=swrqtospan></SPAN> --%>
-							<%--<input type="hidden" name="swrqto" value="<%=swrqto%>">--%>
-						<%--</span>--%>
+						<%--<button type=button id = "deptBtn"  class=Browser  onClick="onShowResource('resourceSpan','hrmid')" name="showdepartment"></BUTTON>--%>
+						<%--<INPUT type="hidden" id="hrmid" name="hrmid" value="<%=hrmid %>">--%>
+						<%--<span id="resourceSpan" name="resourceSpan"><%=ResourceComInfo.getLastname(hrmid)%></span>--%>
 					<%--</wea:item>--%>
-					<%----%>
-					<%--<wea:item>姓名</wea:item>--%>
-					<%--<wea:item>--%>
-						<%--<input type="text" id="lastname" name=lastname class="InputStyle" value="<%=lastname%>" /> &nbsp;&nbsp; --%>
+				<%--</wea:group>--%>
+				<%--<!-- search div initing****** -->--%>
+				<%--<wea:group context="">--%>
+					<%--<wea:item type="toolbar">--%>
+						<%--<input type="submit" value="搜索" class="e8_btn_submit" />--%>
+						<%--<span class="e8_sep_line">|</span>--%>
+						<%--<input type="reset" name="reset" onclick="resetCondtion()" value="重置" class="e8_btn_cancel">--%>
+						<%--<span class="e8_sep_line">|</span>--%>
+						<%--<input type="button" value="取消" class="e8_btn_cancel" id="cancel" />--%>
 					<%--</wea:item>--%>
-
-					<%--<wea:item>部门</wea:item>--%>
-					<%--<wea:item>--%>
-						<%--<button type=button id = "deptBtn"  class=Browser  onClick="onShowDepart('bmspan','departmentid')" name="showdepartment"></BUTTON>--%>
-						<%--<INPUT type="hidden" id="departmentid" name="departmentid" value="<%=departmentid %>">--%>
-						<%--<span id="bmspan" name="bmspan"><%=DepartmentComInfo.getDepartmentname(departmentid)%></span>--%>
-					<%--</wea:item>--%>
-					<wea:item>使用人</wea:item>
-					<wea:item>
-						<button type=button id = "deptBtn"  class=Browser  onClick="onShowResource('resourceSpan','hrmid')" name="showdepartment"></BUTTON>
-						<INPUT type="hidden" id="hrmid" name="hrmid" value="<%=hrmid %>">
-						<span id="resourceSpan" name="resourceSpan"><%=ResourceComInfo.getLastname(hrmid)%></span>
-					</wea:item>
-					
-				</wea:group>
-				<!-- search div initing****** -->
-				<wea:group context="">
-					<wea:item type="toolbar">
-						<input type="submit" value="搜索" class="e8_btn_submit" />
-						<span class="e8_sep_line">|</span>
-						<input type="reset" name="reset" onclick="resetCondtion()" value="重置" class="e8_btn_cancel">
-						<span class="e8_sep_line">|</span>
-						<input type="button" value="取消" class="e8_btn_cancel" id="cancel" />
-					</wea:item>
-				</wea:group>
-			</wea:layout>
-		</div>
+				<%--</wea:group>--%>
+			<%--</wea:layout>--%>
+		<%--</div>--%>
+		<TABLE class="ViewForm" >
+			<COLGROUP>
+				<COL width="10%">
+				<COL width="90%">
+			<TBODY>
+			<TR class="Spacing">
+				<TD class="Line" colSpan=2></TD>
+			</TR>
+			<TR>
+				<TD align="right">使用人</TD>
+				<TD class=Field>
+					<button type=button id = "deptBtn"  class=Browser  onClick="onShowResource('resourceSpan','hrmid')" name="showdepartment"></BUTTON>
+					<INPUT type="hidden" id="hrmid" name="hrmid" value="<%=hrmid %>">
+					<span id="resourceSpan" name="resourceSpan"><%=ResourceComInfo.getLastname(hrmid)%></span>
+				</TD>
+			</TR>
+			<TR class="Spacing">
+				<TD class="Line" colSpan=2></TD>
+			</TR>
+			<TR>
+				<TD colspan="2" align="center"><input type="submit" value="搜索" class="e8_btn_submit" /></TD>
+			</TR>
+			<TR class="Spacing">
+				<TD class="Line" colSpan=2></TD>
+			</TR>
+			</TBODY>
+		</TABLE>
 		<!--列表部分-->
 		<%
 			 String UF_REVISITINFTAB_FORMMODEID = bs.getPropValue("Crm_data", "UF_REVISITINFTAB_FORMMODEID");

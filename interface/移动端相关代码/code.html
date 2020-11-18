@@ -174,7 +174,93 @@
         }
     );
 
-    //点击上传图片按钮
+    /*扫码后执行-----作废*/
+    // Mobile_NS.scanQRCode(function(result){
+    //     setZCinfo(result);
+    // });
+    // function setZCinfo(gdzcbm){
+    //     if(gdzcbm == null || gdzcbm == "" || gdzcbm == undefined){
+    //         Mobile_NS.Alert("固定资产编码获取错误");
+    //         return;
+    //     }
+    //     Mobile_NS.ajax(
+    //         "/interface/guoj/dataAjaxjs.jsp",
+    //         {gdzcbm : gdzcbm},
+    //         function(responseText){
+    //             var json = eval("("+responseText+")");
+    //             var queryFlag = json.queryFlag;
+    //             if(queryFlag == "0"){
+    //                 Mobile_NS.Alert("未查到相关资产信息");
+    //                 return;
+    //             }
+    //             var gsmc = json.gsmc;
+    //             var zclb = json.zclb;
+    //             var zclx = json.zclx;
+    //             var ggxh = json.ggxh;
+    //             var gzrq = json.gzrq;
+    //             var syzx = json.syzx;
+    //             var cgr = json.cgr;
+    //             var syr = json.syr;
+    //             var sybm = json.sybm;
+    //             var cfdd = json.cfdd;
+    //             var bmzrr = json.bmzrr;
+    //             var zczt = json.zczt;
+    //             var ssbk = json.ssbk;
+    //             var pdzt = json.pdzt;
+    //             var pdr = json.pdr;
+    //             var picFileid = json.picFileid;
+    //
+    //             $("#gdzcbm").html(json.gdzcbm);
+    //             $("#gdzcbmVal").val(json.gdzcbmVal);
+    //             $("#gsmc").html(gsmc);
+    //             $("#zclb").html(zclb);
+    //             $("#zclx").html(zclx);
+    //             $("#ggxh").html(ggxh);
+    //             $("#gzrq").html(gzrq);
+    //             $("#syzx").html(syzx);
+    //             $("#cgr").html(cgr);
+    //             $("#syr").html(syr);
+    //             $("#sybm").html(sybm);
+    //             $("#cfdd").html(cfdd);
+    //             $("#bmzrr").html(bmzrr);
+    //             $("#zczt").html(zczt);
+    //             $("#ssbk").html(ssbk);
+    //             $("#pdzt").html(pdzt);
+    //             $("#pdr").html(pdr);
+    //             if(picFileid != ""){
+    //                 $("#zctp").val(picFileid);
+    //                 $("#imgDiv").html("<img src='/weaver/weaver.file.FileDownload?fileid="+picFileid+"' style='width: 100%;'/>");
+    //             }
+    //         }
+    //     );
+    // }
+
+    /*扫码后执行*/
+    Mobile_NS.scanQRCode(function(result){
+        setZCinfo(result);
+    });
+    function setZCinfo(gdzcbm){
+        if(gdzcbm == null || gdzcbm == "" || gdzcbm == undefined){
+            Mobile_NS.Alert("固定资产编码获取错误");
+            return;
+        }
+        Mobile_NS.ajax(
+            "/interface/guoj/dataAjaxjs.jsp",
+            {gdzcbm : gdzcbm},
+            function(responseText){
+                var json = eval("("+responseText+")");
+                var queryFlag = json.queryFlag;
+                if(queryFlag == "0"){
+                    Mobile_NS.Alert("未查到相关资产信息");
+                    return;
+                }
+                var id = json.id;
+                $u("/mobilemode/appHomepageView.jsp?appHomepageId=27&billid="+id);
+            }
+        );
+    }
+
+    /*//点击上传图片按钮------作废
     var gdzcbm = $("#gdzcbm").html();
     //获取选择图片的数量 photoEntryWrapcf0028b87b3843e08e06fc0820062a1b
     var imgCount = $('#photoEntryWrapcf0028b87b3843e08e06fc0820062a1b').children('div').length-1;
@@ -189,7 +275,7 @@
         return false;
     }else{
         $("input[name^='fieldname_gdzcbm']")[0].value = gdzcbm;
-    }
+    }*/
 </script>
 
 
@@ -232,7 +318,7 @@
                     return;
                 }
                 var id = json.id;
-                $u("/mobilemode/layout.jsp?appid=1&modelid=22&uitype=1&billid="+id);
+                $u("/mobilemode/layout.jsp?appid=1&modelid=22&uitype=2&billid="+id);
             }
         );
     }
@@ -244,7 +330,9 @@
     Mobile_NS.ajax(
         "/interface/guoj/addModifyRecord.jsp",
         {gdzcbm : gdzcbm,nowUser:nowUser},
-        function(responseText){}
+        function(responseText){
+            Mobile_NS.refresh();
+        }
     );
 </script>
 

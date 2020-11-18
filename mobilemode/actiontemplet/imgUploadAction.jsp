@@ -92,45 +92,31 @@ if("savedata".equalsIgnoreCase(action)||StringHelper.isEmpty(action)){
 					formDataMap.put("gdzcbm",gdzcbm);
 					formDataMap.put("operateType","图片上传");
 					String modeid = bs.getPropValue("jf","ZCXGJL_MODEID");
-					int modeDataId = modeHandler.saveModeData(modeid,"1",formDataMap,"");
+					modeHandler.saveModeData(modeid,"1",formDataMap,"");
 				}else{
 					status = 0;//失败
 					errMsg = "DOC创建失败，请联系管理员处理！";//错误信息
 				}
 			}
 		}
-		/*
-		//获取title字段的值
-		RecordSet rs = new RecordSet();
-		String sql = "insert into  "+tablename+"(字段名1,字段名2...)  values(字段值1,字段值2...)";
-		boolean flag = rs.executeSql(sql);
-		if(flag){
-			status = 1;//业务执行成功，必须把此状态改为1
-			errMsg = "";
-		}else{
-			status = 0;//失败
-			errMsg = "sql语句出现错误";//错误信息
-		}
-		*/
-		
 		//***********自定义业务逻辑代码区域，仅供参考***********
 		result.put("status", status);//必须返回状态码
-//		if(status==0){//执行失败时，必须同时返回对应的错误信息
-//			errMsg = URLEncoder.encode(errMsg, "UTF-8");
-//			errMsg = errMsg.replaceAll("\\+","%20");
-//			result.put("errMsg", errMsg);
-//		}
+		if(status==0){//执行失败时，必须同时返回对应的错误信息
+			errMsg = URLEncoder.encode(errMsg, "UTF-8");
+			errMsg = errMsg.replaceAll("\\+","%20");
+			result.put("errMsg", errMsg);
+		}
 		result.put("errMsg", errMsg);
 	}catch(Exception ex){
 		ex.printStackTrace();
 		result.put("status", "0");//失败
 		errMsg = Util.null2String(ex.getMessage());//错误信息
-//		errMsg = URLEncoder.encode(errMsg, "UTF-8");
-//		errMsg = errMsg.replaceAll("\\+","%20");
+		errMsg = URLEncoder.encode(errMsg, "UTF-8");
+		errMsg = errMsg.replaceAll("\\+","%20");
 		result.put("errMsg", errMsg);
 	}
-	result.put("fbuttonId", fileUpload.getParameter("C922B3DC3D000001A8A736601CE017DF"));// 提交按钮id
-	out.print("<script type='text/javascript'>parent.alert(JSON.stringify("+result+"));parent.Mobile_NS.formResponse("+result.toString()+");</script>");
+	//result.put("fbuttonId", fileUpload.getParameter("C922B3DC3D000001A8A736601CE017DF"));// 提交按钮id
+	out.print("<script type='text/javascript'>window.parent.alert(JSON.stringify("+result+"));parent.Mobile_NS.formResponse("+result.toString()+");</script>");
 	out.print("<script type='text/javascript'>window.location.href='/mobilemode/appHomepageView.jsp?appHomepageId=10';</script>");
 }
 out.flush();

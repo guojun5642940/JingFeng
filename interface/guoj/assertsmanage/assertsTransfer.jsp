@@ -182,6 +182,8 @@
 		</div>
 		<input type="hidden" name="billids" id="billids" value="<%=billids%>">
 		<input type="hidden" name="ysyr" id="ysyr" value="<%=ysyr%>">
+		<input type="hidden" name="nowUserid" id="nowUserid" value="<%=nowUserid%>">
+
 	</form>
 
 </body>
