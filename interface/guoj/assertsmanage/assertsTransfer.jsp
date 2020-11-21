@@ -43,14 +43,23 @@
 		String ysyrName = "";
 		String ysybm = "";
 		String ysyzx = "";
+		String ybmzrr = "";
+		String ybmzrrName = "";
+		String ycfdd = "";
 		RecordSet rs = new RecordSet();
 		rs.execute(" select "+backFields+" from "+dtable+" "+sqlWhere);
 		if(rs.next()){
 			ysyr = Util.null2String(rs.getString("syr"));
 			ysybm = Util.null2String(rs.getString("sybm"));
 			ysyzx = Util.null2String(rs.getString("syzx"));
+			ybmzrr = Util.null2String(rs.getString("bmzrr"));
+			ycfdd = Util.null2String(rs.getString("cfdd"));
+
 			if(!"".equals(ysyr)){
 				ysyrName = resourceComInfo.getLastname(ysyr);
+			}
+			if(!"".equals(ybmzrr)){
+				ybmzrrName = resourceComInfo.getLastname(ybmzrr);
 			}
 			if(!"".equals(ysybm)){
 				ysybm = departmentComInfo.getDepartmentName(ysybm);
@@ -114,6 +123,16 @@
 										<td class="field"><%=ysyzx%></td>
 									</tr>
 									<tr style="height:1px !important;" class="Spacing"><td class="paddingLeft18" colspan="2"><div class="intervalDivClass"></div></td></tr>
+									<tr>
+										<td class="fieldName">部门责任人</td>
+										<td class="field"><%=ybmzrrName%></td>
+									</tr>
+									<tr style="height:1px !important;" class="Spacing"><td class="paddingLeft18" colspan="2"><div class="intervalDivClass"></div></td></tr>
+									<tr>
+										<td class="fieldName">存放地点</td>
+										<td class="field"><%=ycfdd%></td>
+									</tr>
+									<tr style="height:1px !important;" class="Spacing"><td class="paddingLeft18" colspan="2"><div class="intervalDivClass"></div></td></tr>
 								</tbody>
 							</table>
 						</td>
@@ -145,7 +164,7 @@
 									<tr>
 										<td class="fieldName">接收人</td>
 										<td class="field">
-											<button type=button id = "deptBtn"  class=Browser  onClick="onShowResource('resourceSpan','hrmid')" name="showdepartment"></BUTTON>
+											<button type=button class=Browser  onClick="onShowResource('resourceSpan','hrmid')" name="showdepartment"></BUTTON>
 											<INPUT type="hidden" id="hrmid" name="hrmid" >
 											<span id="resourceSpan" name="resourceSpan">
 												<img src="/images/BacoError_wev8.gif" align="absmiddle">
@@ -173,6 +192,24 @@
 										</td>
 									</tr>
 									<tr style="height:1px !important;" class="Spacing"><td class="paddingLeft18" colspan="2"><div class="intervalDivClass"></div></td></tr>
+									<tr>
+										<td class="fieldName">部门负责人</td>
+										<td class="field">
+											<button type=button class=Browser  onClick="onShowResource('xbmzrrSpan','xbmzrr')" name="showdepartment"></BUTTON>
+											<INPUT type="hidden" id="xbmzrr" name="xbmzrr" >
+											<span id="xbmzrrSpan" name="xbmzrrSpan">
+												<img src="/images/BacoError_wev8.gif" align="absmiddle">
+											</span>
+										</td>
+									</tr>
+									<tr style="height:1px !important;" class="Spacing"><td class="paddingLeft18" colspan="2"><div class="intervalDivClass"></div></td></tr>
+									<tr>
+										<td class="fieldName">新存放地点</td>
+										<td class="field">
+											<INPUT type="text" id="xcfdd" name="xcfdd" >
+										</td>
+									</tr>
+									<tr style="height:1px !important;" class="Spacing"><td class="paddingLeft18" colspan="2"><div class="intervalDivClass"></div></td></tr>
 								</tbody>
 							</table>
 						</td>
@@ -196,6 +233,8 @@
 		var hrmid = $("#hrmid").val();
 		var ssbm = $("#ssbm").val();
 		var sszxid = $("#sszxid").val();
+		var xbmzrr = $("#xbmzrr").val();
+		var xcfdd = $("#xcfdd").val();
 		if(hrmid == ""){
 			top.Dialog.alert("接收人不能为空");
 			return;
@@ -206,6 +245,14 @@
 		}
 		if(sszxid == ""){
 			top.Dialog.alert("接收人所属中心不能为空");
+			return;
+		}
+		if(xbmzrr == ""){
+			top.Dialog.alert("部门责任人不能为空");
+			return;
+		}
+		if(xcfdd == ""){
+			top.Dialog.alert("新存放地点不能为空");
 			return;
 		}
 		window.parent.forbiddenPage();

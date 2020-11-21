@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  *  @author: guojun
  *  @Date: 2020/11/4 23:07
- *  @Description: 固定资产调拨流程-多明细
+ *  @Description: 固定资产调拨流程-多明细-归档写入资产卡片
  */
 public class MutiFixedAssetsAllocationServiceImpl implements Action {
 
@@ -53,14 +53,15 @@ public class MutiFixedAssetsAllocationServiceImpl implements Action {
         String sql = "select * from "+mxTablename+"_dt1 where mainid = (select id from "+mxTablename+" where requestid = '"+requestId+"')";
         rs.execute(sql);
         while(rs.next()){
-            String	cfdd = Util.null2String(rs.getString("cfdd")); //存放地点
-            String	gdzcbm = Util.null2String(rs.getString("gdzcbm")); //固定资产编码 实际存资产卡片ID
-            String	xsybm = Util.null2String(rs.getString("xsybm")); //现使用部门
-            String	xsyr = Util.null2String(rs.getString("xsyr")); //现使用人
-            String	xsyzx = Util.null2String(rs.getString("xsyzx")); //现使用中心
-            String 	xfzr = Util.null2String(rs.getString("xfzr")); //现使用中心
+            String cfdd = Util.null2String(rs.getString("cfdd")); //存放地点
+            String gdzcbm = Util.null2String(rs.getString("gdzcbm")); //固定资产编码 实际存资产卡片ID
+            String xsybm = Util.null2String(rs.getString("xsybm")); //现使用部门
+            String xsyr = Util.null2String(rs.getString("xsyr")); //现使用人
+            String xsyzx = Util.null2String(rs.getString("xsyzx")); //现使用中心
+            String xfzr = Util.null2String(rs.getString("xfzr")); //现使用中心
+            String xcfdd = Util.null2String(rs.getString("xcfdd"));
             String updateSql = "update "+ Constants.MODEL_TABLENAME_GDZC +" set syr = '"+xsyr+"'," +
-                    "sybm='"+xsybm+"',lyrq='"+fqrq+"',syzx='"+xsyzx+"',cfdd = '"+cfdd+"',zczt='1',bmzrr = '"+xfzr+"' where id = '"+gdzcbm+"' ";
+                    "sybm='"+xsybm+"',lyrq='"+fqrq+"',syzx='"+xsyzx+"',cfdd = '"+xcfdd+"',zczt='1',bmzrr = '"+xfzr+"' where id = '"+gdzcbm+"' ";
 
             bs.writeLog("sql-MutiFixedAssetsAllocationServiceImpl:["+sql+"]");
             rsUpdate.execute(updateSql);
