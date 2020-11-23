@@ -40,12 +40,14 @@ public class AllocationSetHrmAction implements Action {
         RecordSet rs = new RecordSet();
         RecordSet rsUpdate = new RecordSet();
         String mxTablename = CommonService.getFormTableName(workflowId);
-        String sql = "select bmzrr from "+mxTablename+"_dt1 where mainid = (select id from "+mxTablename+" where requestid = '"+requestId+"')";
+        String sql = "select xfzr from "+mxTablename+"_dt1 where mainid = (select id from "+mxTablename+" where requestid = '"+requestId+"')";
         rs.execute(sql);
         String drlzy = "";
         while(rs.next()){
             String	xfzr = Util.null2String(rs.getString("xfzr"));
-            drlzy += (xfzr+",");
+            if((","+drlzy+",").indexOf(","+xfzr+",") < 0){
+                drlzy += (xfzr+",");
+            }
         }
         drlzy = drlzy.length()>0?(drlzy.substring(0,drlzy.length()-1)):"";
         //更新主表字段

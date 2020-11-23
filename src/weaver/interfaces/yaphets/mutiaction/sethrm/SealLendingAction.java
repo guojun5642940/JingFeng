@@ -9,17 +9,13 @@ import weaver.soa.workflow.request.RequestInfo;
 import weaver.workflow.request.RequestComInfo;
 import weaver.workflow.workflow.WorkflowComInfo;
 
-/**
- *  @author: guojun
- *  @Date: 2020/11/21 14:07
- *  @Description:  采购流程 明细表的负责人字段的值和使用人字段的值传到主表的多人力资源字段
- */
-public class PurchaseSetHrmAction implements Action {
+public class SealLendingAction implements Action {
+
     private RequestComInfo requestComInfo;
     private weaver.workflow.workflow.WorkflowComInfo WorkflowComInfo;
     private BaseBean bs;
 
-    public PurchaseSetHrmAction() {
+    public SealLendingAction() {
         try {
             requestComInfo = new RequestComInfo();
             WorkflowComInfo = new WorkflowComInfo();
@@ -35,30 +31,24 @@ public class PurchaseSetHrmAction implements Action {
         String requestId = request.getRequestid();
         String requestName = requestComInfo.getRequestname(requestId);
         String workflowName = WorkflowComInfo.getWorkflowname(workflowId);
-        bs.writeLog("PurchaseSetHrmAction--进入action--workflowId：{"+workflowId+"},workflowName：{"+workflowName+"},requestId：{"+requestId+"},requestName：{"+requestName+"}");
+        bs.writeLog("SealLendingAction--进入action--workflowId：{"+workflowId+"},workflowName：{"+workflowName+"},requestId：{"+requestId+"},requestName：{"+requestName+"}");
 
         RecordSet rs = new RecordSet();
         RecordSet rsUpdate = new RecordSet();
         String mxTablename = CommonService.getFormTableName(workflowId);
-        String sql = "select bmzrr,syr from "+mxTablename+"_dt1 where mainid = (select id from "+mxTablename+" where requestid = '"+requestId+"')";
+        String sql = "select ggsfr from "+mxTablename+"_dt1 where mainid = (select id from "+mxTablename+" where requestid = '"+requestId+"')";
         rs.execute(sql);
-        String fzrd = "";
-        String syrd = "";
+        String rlzy = "";
         while(rs.next()){
-            String bmzrr = Util.null2String(rs.getString("bmzrr"));
-            String syr = Util.null2String(rs.getString("syr"));
-            if((","+fzrd+",").indexOf(","+bmzrr+",") < 0){
-                fzrd += (bmzrr+",");
-            }
-            if((","+syrd+",").indexOf(","+syr+",") < 0){
-                syrd += (syr+",");
+            String	ggsfr = Util.null2String(rs.getString("ggsfr"));
+            if((","+rlzy+",").indexOf(","+ggsfr+",") < 0){
+                rlzy += (ggsfr+",");
             }
         }
-        fzrd = fzrd.length()>0?(fzrd.substring(0,fzrd.length()-1)):"";
-        syrd = syrd.length()>0?(syrd.substring(0,syrd.length()-1)):"";
+        rlzy = rlzy.length()>0?(rlzy.substring(0,rlzy.length()-1)):"";
         //更新主表字段
-        sql = "update "+mxTablename+" set fzrd = '"+fzrd+"',syrd = '"+syrd+"' where requestId = '"+requestId+"'";
-        bs.writeLog("sql-PurchaseSetHrmAction:["+sql+"]");
+        sql = "update "+mxTablename+" set rlzy = '"+rlzy+"' where requestId = '"+requestId+"'";
+        bs.writeLog("sql-SealLendingAction:["+sql+"]");
         rsUpdate.execute(sql);
         return SUCCESS;
     }
