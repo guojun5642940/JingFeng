@@ -28,6 +28,7 @@
 		String pageId = "";
 
 		String hrmid = Util.null2String(request.getParameter("hrmid"));
+		String type = Util.null2String(request.getParameter("type"));
 		String hrmName = Util.null2String(request.getParameter("hrmName"));
 	%>
 	
@@ -104,7 +105,23 @@
 				<TD class="Line" colSpan=2></TD>
 			</TR>
 			<TR>
-				<TD align="right">使用人</TD>
+				<TD align="right">
+					转移类型
+				</TD>
+				<TD class=Field>
+					<select name="type" id="type">
+						<option>转移使用人</option>
+						<option>转移使用人</option>
+					</select>
+				</TD>
+			</TR>
+			<TR class="Spacing">
+				<TD class="Line" colSpan=2></TD>
+			</TR>
+			<TR>
+				<TD align="right">
+					使用人
+				</TD>
 				<TD class=Field>
 					<button type=button id = "deptBtn"  class=Browser  onClick="onShowResource('resourceSpan','hrmid')" name="showdepartment"></BUTTON>
 					<INPUT type="hidden" id="hrmid" name="hrmid" value="<%=hrmid %>">
