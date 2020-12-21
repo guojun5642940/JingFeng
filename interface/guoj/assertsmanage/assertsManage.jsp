@@ -28,7 +28,7 @@
 		String pageId = "";
 
 		String hrmid = Util.null2String(request.getParameter("hrmid"));
-		String type = Util.null2String(request.getParameter("type"));
+		String changeType = Util.null2String(request.getParameter("changeType"),"1");
 		String hrmName = Util.null2String(request.getParameter("hrmName"));
 	%>
 	
@@ -61,8 +61,6 @@
 			<tr>
 				<td></td>
 				<td class="rightSearchSpan">
-				    <%--<input type="button" value="导出当页" class='e8_btn_top middle' onclick="_xtable_getExcel()">--%>
-				    <%--<input type="button" value="导出全部" class='e8_btn_top middle' onclick="_xtable_getAllExcel()">--%>
 					<input type="button" value="批量转移" class='e8_btn_top middle' onclick="batchTransfer()">
 					<input type="text" id="searchInput" name=hrmName class="searchInput middle" value="<%=hrmName%>" /> &nbsp;&nbsp;
 					<%--<span id="advancedSearch" class="advancedSearch">&nbsp;&nbsp;</span>--%>
@@ -72,30 +70,6 @@
 		</table>
 	</form>
 	<FORM id=weaver name=weaver method=post action='assertsManage.jsp'>
-		<%--<div class="advancedSearchDiv" id="advancedSearchDiv">--%>
-			<%--<input type="hidden" name="ids" /> --%>
-			<%--<input type="hidden" name="method" />--%>
-			<%--<wea:layout type="4col">--%>
-				<%--<wea:group context="常用条件">--%>
-					<%--<wea:item>使用人</wea:item>--%>
-					<%--<wea:item>--%>
-						<%--<button type=button id = "deptBtn"  class=Browser  onClick="onShowResource('resourceSpan','hrmid')" name="showdepartment"></BUTTON>--%>
-						<%--<INPUT type="hidden" id="hrmid" name="hrmid" value="<%=hrmid %>">--%>
-						<%--<span id="resourceSpan" name="resourceSpan"><%=ResourceComInfo.getLastname(hrmid)%></span>--%>
-					<%--</wea:item>--%>
-				<%--</wea:group>--%>
-				<%--<!-- search div initing****** -->--%>
-				<%--<wea:group context="">--%>
-					<%--<wea:item type="toolbar">--%>
-						<%--<input type="submit" value="搜索" class="e8_btn_submit" />--%>
-						<%--<span class="e8_sep_line">|</span>--%>
-						<%--<input type="reset" name="reset" onclick="resetCondtion()" value="重置" class="e8_btn_cancel">--%>
-						<%--<span class="e8_sep_line">|</span>--%>
-						<%--<input type="button" value="取消" class="e8_btn_cancel" id="cancel" />--%>
-					<%--</wea:item>--%>
-				<%--</wea:group>--%>
-			<%--</wea:layout>--%>
-		<%--</div>--%>
 		<TABLE class="ViewForm" >
 			<COLGROUP>
 				<COL width="10%">
@@ -109,9 +83,10 @@
 					转移类型
 				</TD>
 				<TD class=Field>
-					<select name="type" id="type">
-						<option>转移使用人</option>
-						<option>转移使用人</option>
+                    &nbsp;&nbsp;
+					<select name="changeType" id="changeType" onchange="showDifferent()">
+						<option value="1" <%if("1".equals(changeType)){ %> selected="selected"<% }%>>转移使用人</option>
+						<option value="2" <%if("2".equals(changeType)){ %> selected="selected"<% }%>>转移部门负责人</option>
 					</select>
 				</TD>
 			</TR>
@@ -120,12 +95,21 @@
 			</TR>
 			<TR>
 				<TD align="right">
-					使用人
+					<span id="hrmtitle">
+                        <%
+                            if("1".equals(changeType)){
+                                %>使用人<%
+                            }else{
+                                %>部门负责人<%
+                            }
+                        %>
+                    </span>
 				</TD>
 				<TD class=Field>
-					<button type=button id = "deptBtn"  class=Browser  onClick="onShowResource('resourceSpan','hrmid')" name="showdepartment"></BUTTON>
-					<INPUT type="hidden" id="hrmid" name="hrmid" value="<%=hrmid %>">
-					<span id="resourceSpan" name="resourceSpan"><%=ResourceComInfo.getLastname(hrmid)%></span>
+                    &nbsp;&nbsp;
+                    <button type=button id = "deptBtn"  class=Browser  onClick="onShowResource('resourceSpan','hrmid')" name="showdepartment"></BUTTON>
+                    <INPUT type="hidden" id="hrmid" name="hrmid" value="<%=hrmid %>">
+                    <span id="resourceSpan" name="resourceSpan"><%=ResourceComInfo.getLastname(hrmid)%></span>
 				</TD>
 			</TR>
 			<TR class="Spacing">
@@ -153,10 +137,15 @@
 	         String fromSql = " from "+dtable ;
 	         String sqlWhere = " where 1=1 " ;
 
-	         if("".equals(hrmid) && "".equals(hrmName)){
+	         if("".equals(hrmid)){
 				 sqlWhere += " and 1=2";
 			 }else if(!"".equals(hrmid)){
-				sqlWhere += " and u.syr = '"+hrmid+"'";
+
+	             if("1".equals(changeType)){
+                     sqlWhere += " and u.syr = '"+hrmid+"'";
+                 }else{
+                     sqlWhere += " and u.bmzrr = '"+hrmid+"'";
+                 }
 			 }else if(!"".equals(hrmName)){
 				 sqlWhere += " and h.lastname = '"+hrmName+"'";
 			 }
@@ -211,7 +200,7 @@
 		diag_vote.maxiumnable = true;
 		diag_vote.checkDataChange = false;
 		diag_vote.Title = "批量转移";
-		diag_vote.URL = "/interface/guoj/assertsmanage/tab.jsp?billids="+ids;
+		diag_vote.URL = "/interface/guoj/assertsmanage/tab.jsp?billids="+ids+"&changeType=<%=changeType%>";
 		diag_vote.show();
 	}
 	function search(){
@@ -282,6 +271,20 @@ jQuery(document).ready(function(){
 function jump(src){
 	window.open(src);
 }
+
+function showDifferent(){
+    // var type = $("#type option:selected").val();
+    // if(type == "1"){
+    //     $("#hrmtitle").html("使用人");
+    // }else{
+    //     $("#hrmtitle").html("部门负责人");
+    // }
+    //清空已选择的人员信息
+    $("#hrmid").val("");
+    $("#resourceSpan").html("");
+    jQuery("#weaver").submit();
+}
+
 </script>
 <script language="javascript" src="/js/datetime_wev8.js"></script>
 <script language="javascript" src="/js/selectDateTime_wev8.js"></script>

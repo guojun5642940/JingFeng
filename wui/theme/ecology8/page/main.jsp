@@ -1677,8 +1677,8 @@ $(".closebtn").bind("click",function(){
 	
 })
 
-function closeDialogAndRefesh(hrmid){
-	jQuery("#mainFrame").attr("src","/interface/guoj/assertsmanage/mainTab.jsp?hrmid="+hrmid);
+function closeDialogAndRefesh(hrmid,changeType){
+	jQuery("#mainFrame").attr("src","/interface/guoj/assertsmanage/mainTab.jsp?hrmid="+hrmid+"&changeType="+changeType);
 }
 </script>
 <%@ include file="/email/new/timingReceive.jsp" %>

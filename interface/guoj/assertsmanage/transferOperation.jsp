@@ -26,6 +26,8 @@
 	String sqlQuery = "";
 
 	String xbmzrr = Util.null2String(request.getParameter("xbmzrr"));//新部门责任人
+	String xbmzrr2 = Util.null2String(request.getParameter("xbmzrr2"));//新部门责任人-根据部门责任人批量变更
+	String changeType = Util.null2String(request.getParameter("changeType"));
 	String xcfdd = Util.null2String(request.getParameter("xcfdd"));//新存放地点
 
 	//记录操作日志
@@ -39,20 +41,26 @@
 				String ycfdd = getCfdd(billid);
 
 				String operateContent = "";
-				if(!ysyr.equals(hrmid)){
-					operateContent += "使用人由["+ysyr+":"+resourceComInfo.getLastname(ysyr)+"] 修改为["+hrmid+":"+resourceComInfo.getLastname(hrmid)+"],";
-					operateContent += "使用人部门由["+ysybm+":"+departmentComInfo.getDepartmentName(ysybm)+"] 修改为["+ssbm+":"+departmentComInfo.getDepartmentName(ssbm)+"],";
-				}
-				if(!ysyzx.equals(sszxid)){
-					operateContent += "所属中心由["+ysyzx+":"+getSszxShowName(ysyzx)+"] 修改为["+sszxid+":"+getSszxShowName(sszxid)+"]";
-				}
-				if(!ybmzrr.equals(xbmzrr)){
-					operateContent += "部门责任人由["+ybmzrr+":"+resourceComInfo.getLastname(ybmzrr)+"] 修改为["+xbmzrr+":"+resourceComInfo.getLastname(xbmzrr)+"],";
-				}
-				if(!ycfdd.equals(xcfdd)){
-					operateContent += "存放地点由["+ycfdd+"] 修改为["+xcfdd+"],";
-				}
 
+				if("1".equals(changeType)){
+					if(!ysyr.equals(hrmid)){
+						operateContent += "使用人由["+ysyr+":"+resourceComInfo.getLastname(ysyr)+"] 修改为["+hrmid+":"+resourceComInfo.getLastname(hrmid)+"],";
+						operateContent += "使用人部门由["+ysybm+":"+departmentComInfo.getDepartmentName(ysybm)+"] 修改为["+ssbm+":"+departmentComInfo.getDepartmentName(ssbm)+"],";
+					}
+					if(!ysyzx.equals(sszxid)){
+						operateContent += "所属中心由["+ysyzx+":"+getSszxShowName(ysyzx)+"] 修改为["+sszxid+":"+getSszxShowName(sszxid)+"]";
+					}
+					if(!ybmzrr.equals(xbmzrr)){
+						operateContent += "部门责任人由["+ybmzrr+":"+resourceComInfo.getLastname(ybmzrr)+"] 修改为["+xbmzrr+":"+resourceComInfo.getLastname(xbmzrr)+"],";
+					}
+					if(!ycfdd.equals(xcfdd)){
+						operateContent += "存放地点由["+ycfdd+"] 修改为["+xcfdd+"],";
+					}
+				}else{
+					if(!ybmzrr.equals(xbmzrr2)){
+						operateContent += "部门责任人由["+ybmzrr+":"+resourceComInfo.getLastname(ybmzrr)+"] 修改为["+xbmzrr2+":"+resourceComInfo.getLastname(xbmzrr2)+"],";
+					}
+				}
 				FormModeHandler modeHandler = new FormModeHandler();
 				Map<String, String> formDataMap = new HashMap<>();
 				formDataMap.put("operator",nowUserid);
@@ -69,20 +77,23 @@
 		String ysyzx = getSszx(billids);
 		String ybmzrr = getBmzrr(billids);
 		String ycfdd = getCfdd(billids);
-
 		String operateContent = "";
-		if(!ysyr.equals(hrmid)){
-			operateContent += "使用人由["+ysyr+":"+resourceComInfo.getLastname(ysyr)+"] 修改为["+hrmid+":"+resourceComInfo.getLastname(hrmid)+"],";
-			operateContent += "使用人部门由["+ysybm+":"+departmentComInfo.getDepartmentName(ysybm)+"] 修改为["+ssbm+":"+departmentComInfo.getDepartmentName(ssbm)+"],";
-		}
-		if(!ysyzx.equals(sszxid)){
-			operateContent += "所属中心由["+ysyzx+":"+getSszxShowName(ysyzx)+"] 修改为["+sszxid+":"+getSszxShowName(sszxid)+"]";
-		}
-		if(!ybmzrr.equals(xbmzrr)){
-			operateContent += "部门责任人由["+ybmzrr+":"+resourceComInfo.getLastname(ybmzrr)+"] 修改为["+xbmzrr+":"+resourceComInfo.getLastname(xbmzrr)+"],";
-		}
-		if(!ycfdd.equals(xcfdd)){
-			operateContent += "存放地点由["+ycfdd+"] 修改为["+xcfdd+"],";
+		if("1".equals(changeType)){
+			if(!ysyr.equals(hrmid)){
+				operateContent += "使用人由["+ysyr+":"+resourceComInfo.getLastname(ysyr)+"] 修改为["+hrmid+":"+resourceComInfo.getLastname(hrmid)+"],";
+				operateContent += "使用人部门由["+ysybm+":"+departmentComInfo.getDepartmentName(ysybm)+"] 修改为["+ssbm+":"+departmentComInfo.getDepartmentName(ssbm)+"],";
+			}
+			if(!ysyzx.equals(sszxid)){
+				operateContent += "所属中心由["+ysyzx+":"+getSszxShowName(ysyzx)+"] 修改为["+sszxid+":"+getSszxShowName(sszxid)+"]";
+			}
+			if(!ybmzrr.equals(xbmzrr)){
+				operateContent += "部门责任人由["+ybmzrr+":"+resourceComInfo.getLastname(ybmzrr)+"] 修改为["+xbmzrr+":"+resourceComInfo.getLastname(xbmzrr)+"],";
+			}
+			if(!ycfdd.equals(xcfdd)){
+				operateContent += "存放地点由["+ycfdd+"] 修改为["+xcfdd+"],";
+			}
+		}else{
+			operateContent += "部门责任人由["+ybmzrr+":"+resourceComInfo.getLastname(ybmzrr)+"] 修改为["+xbmzrr2+":"+resourceComInfo.getLastname(xbmzrr2)+"],";
 		}
 		FormModeHandler modeHandler = new FormModeHandler();
 		Map<String, String> formDataMap = new HashMap<>();
@@ -94,10 +105,15 @@
 		String modeid = bs.getPropValue("jf","ZCXGJL_MODEID");
 		modeHandler.saveModeData(modeid,"1",formDataMap,"");
 	}
-	String sql = "update uf_zckp set syr = '"+hrmid+"' ,sybm = '"+ssbm+"',syzx = '"+sszxid+"', bmzrr = '"+xbmzrr+"', cfdd = '"+xcfdd+"'  where id in ("+billids+")";
+	String sql = "";
+	if("1".equals(changeType)){
+		sql = "update uf_zckp set syr = '"+hrmid+"' ,sybm = '"+ssbm+"',syzx = '"+sszxid+"', bmzrr = '"+xbmzrr+"', cfdd = '"+xcfdd+"'  where id in ("+billids+")";
+	}else{
+		sql = "update uf_zckp set bmzrr = '"+xbmzrr2+"' where id in ("+billids+")";
+	}
 	bs.writeLog("资产批量转移sql:---"+sql);
 	rsUpdate.execute(sql);
-	writer.write("<html><body onload=\"window.parent.parent.closeDialogAndRefesh("+ysyr+");window.parent.closeDialog();\"></body></html>");
+	writer.write("<html><body onload=\"window.parent.parent.closeDialogAndRefesh("+ysyr+","+changeType+");window.parent.closeDialog();\"></body></html>");
 %>
 
 

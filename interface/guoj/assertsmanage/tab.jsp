@@ -39,7 +39,8 @@ if(session.getAttribute("detachable")!=null){
 
 <%
 	String billids = Util.null2String(request.getParameter("billids"));
-	String target = "assertsTransfer.jsp?billids="+billids;
+	String changeType = Util.null2String(request.getParameter("changeType"));
+	String target = "assertsTransfer.jsp?billids="+billids+"&changeType="+changeType;
 	titlename = "批量转移";
 
 	

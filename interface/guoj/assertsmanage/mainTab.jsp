@@ -46,7 +46,7 @@ titlename = "批量调整";
 
 String orgid = Util.null2String(request.getParameter("orgid"));
 String hrmid = Util.null2String(request.getParameter("hrmid"));
-
+String changeType = Util.null2String(request.getParameter("changeType"),"1");
 %>
 <%
 %>
@@ -119,7 +119,7 @@ function jsOnNavLogClick(){
 		  <%} %>	
       
 	      <li class="current">
-		      <a href="/interface/guoj/assertsmanage/assertsManage.jsp?hrmid=<%=hrmid%>" target="tabcontentframe">
+		      <a href="/interface/guoj/assertsmanage/assertsManage.jsp?hrmid=<%=hrmid%>&changeType=<%=changeType%>" target="tabcontentframe">
 			      <%="批量管理" %>
 			      <span id="test1"></span>
 		      </a>
@@ -134,7 +134,7 @@ function jsOnNavLogClick(){
 	    <%} %>
      <div class="tab_box">
          <div>
-             <iframe src="/interface/guoj/assertsmanage/assertsManage.jsp?hrmid=<%=hrmid%>" id="tabcontentframe" name="tabcontentframe"  onload="update();" class="flowFrame" frameborder="0" height="100%" width="100%;"></iframe>
+             <iframe src="/interface/guoj/assertsmanage/assertsManage.jsp?hrmid=<%=hrmid%>&changeType=<%=changeType%>" id="tabcontentframe" name="tabcontentframe"  onload="update();" class="flowFrame" frameborder="0" height="100%" width="100%;"></iframe>
          </div>
      </div>
  </div>          
