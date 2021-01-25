@@ -16,6 +16,8 @@
 
     String gdzcbm = Util.null2String(request.getParameter("gdzcbm"));//固定资产编码
     gdzcbm = gdzcbm.replace("“","").replace("”","");
+    String jkflag = Util.null2String(request.getParameter("jkflag"),"");//监控标记
+    String nowUser = Util.null2String(request.getParameter("nowUser"),"");
 
     String sql = "select * from "+Constants.MODEL_TABLENAME_GDZC+" where gdzcbm = '"+gdzcbm+"'";
     bs.writeLog("移动建模扫码查询资产卡片信息sql:"+sql);
@@ -39,6 +41,7 @@
     String ssbk = "";
     String zctp = "";
     String picFileid = "";
+    String roleFlag = "0";
     if(rs.next()){
         id = Util.null2String(rs.getString("id"));
         gsmc = Util.null2String(rs.getString("gsmc"));
@@ -62,7 +65,6 @@
             picFileid = getImageFileid(zctp);
         }
 
-
         if("0".equals(zclb)){
             zclb = "固定资产";
         }else if("1".equals(zclb)){
@@ -83,6 +85,19 @@
             pdzt = "未盘点";
         }
     }
+
+    //判断监控页面有没有当前板块的权限
+    sql = "select * from uf_rybk where ssbk = '"+ssbk+"'";
+    rs.execute(sql);
+    while(rs.next()){
+        String hrmid = Util.null2String(rs.getString("hrmid"));
+        if((","+hrmid+",").indexOf(","+nowUser+",") >= 0){
+            roleFlag = "1";
+            break;
+        }
+    }
+
+
     String result = "{'gsmc':'"+getDwmc(gsmc)+"'," +
             "'zclb':'"+zclb+"'," +
             "'id':'"+id+"'," +
@@ -102,6 +117,7 @@
             "'ssbk':'"+ssbk+"'," +
             "'picFileid':'"+picFileid+"'," +
             "'zctp':'"+zctp+"'," +
+            "'roleFlag':'"+roleFlag+"'," +
             "'queryFlag':'"+queryFlag+"'}";
     out.print(result);
 %>

@@ -12,6 +12,7 @@
 <jsp:useBean id="UserDefaultManager" class="weaver.docs.tools.UserDefaultManager" scope="session" />
 <jsp:useBean id="JobTitlesComInfo" class="weaver.hrm.job.JobTitlesComInfo" scope="page" />
 <jsp:useBean id="bs" class="weaver.general.BaseBean"></jsp:useBean>
+<%@ page import="weaver.interfaces.yaphets.role.PowerUtil" %>
 
 <HTML>
 	<HEAD>
@@ -26,6 +27,10 @@
 		String sqlCondition = "";
 		String pageflag = Util.null2String(request.getParameter("pageflag"));
 		String pageId = "";
+
+		int userId=user.getUID();
+		PowerUtil powerUtil = new PowerUtil();
+		powerUtil.CheckModuleRole("500",response,userId);
 
 		String hrmid = Util.null2String(request.getParameter("hrmid"));
 		String changeType = Util.null2String(request.getParameter("changeType"),"1");

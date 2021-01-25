@@ -309,12 +309,17 @@
         }
         Mobile_NS.ajax(
             "/interface/guoj/dataAjaxjs.jsp",
-            {gdzcbm : gdzcbm},
+            {gdzcbm : gdzcbm,jkflag:'1',nowUser:Mobile_NS.getCurrUser()},
             function(responseText){
                 var json = eval("("+responseText+")");
                 var queryFlag = json.queryFlag;
                 if(queryFlag == "0"){
                     Mobile_NS.Alert("未查到相关资产信息");
+                    return;
+                }
+                var roleFlag = json.roleFlag;
+                if(roleFlag == "0"){
+                    Mobile_NS.Alert("无该板块资产监控权限");
                     return;
                 }
                 var id = json.id;
